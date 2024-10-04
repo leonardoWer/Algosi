@@ -2,7 +2,7 @@ file_in = open("input.txt")
 file_out = open("output.txt", "w")
 
 n = int(file_in.readline()) #Количество элементов
-lst = [int(el) for el in file_in] #Список с элементами
+lst = list(map(int, file_in.readline().split())) #Список с элементами
 
 def insertion_sort(n:int, lst:list) ->str:
     for i in range(1, n):
