@@ -1,3 +1,7 @@
+"""
+Линейный поиск
+"""
+
 file_in = open("input.txt")
 file_out = open("output.txt", "w")
 
