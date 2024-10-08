@@ -2,8 +2,8 @@
 Линейный поиск
 """
 
-file_in = open("input.txt")
-file_out = open("output.txt", "w")
+file_in = open("../txtfiles/input.txt")
+file_out = open("../txtfiles/output.txt", "w")
 
 a = list(map(int, file_in.readline().split()))
 v = int(file_in.readline())

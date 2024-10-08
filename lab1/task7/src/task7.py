@@ -5,8 +5,8 @@
 - Самого богатого
 """
 
-file_in = open("input.txt")
-file_out = open("output.txt", "w")
+file_in = open("../txtfiles/input.txt")
+file_out = open("../txtfiles/output.txt", "w")
 
 n = int(file_in.readline()) #Количество жителей
 m = list(map(float, file_in.readline().split())) #Список с состоянием житиель, индексы жителей i+1
