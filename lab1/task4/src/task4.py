@@ -17,7 +17,7 @@ def line_search(lst: list, find_el: int):
             cnt_el+=1
             ind_list.append(i)
     if len(ind_list) >1:
-        return f"Cnt v: {len(ind_list)}\nIndex's v: {",".join([str(el) for el in ind_list])}"
+        return f"Cnt v: {len(ind_list)}\nIndex's v: {", ".join([str(el) for el in ind_list])}"
     elif len(ind_list) == 1:
         return ind_list[0]
     return -1
