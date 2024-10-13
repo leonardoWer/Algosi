@@ -9,14 +9,17 @@ n = int(file_in.readline()) # Количество элементов
 lst = list(map(int, file_in.readline().split())) # Список с элементами
 
 def selection_sort(n: int, lst: list) -> str:
-    lst_copy = lst[:]
-    res = [min(lst)]
-    lst_copy.remove(min(lst))
     for i in range(n-1):
-        res.append(min(lst_copy))
-        lst_copy.remove(min(lst_copy))
-    res += lst_copy
-    res = [str(el) for el in res]
-    return " ".join(res)
+        key = lst[i] # Выбираем минимальный элемент
+        min_ind = i
+        for j in range(i+1, n):
+            if key>lst[j]:
+                key = lst[j]
+                min_ind = j
+        if min_ind != i: # Обмен значениями
+            lst[i], lst[min_ind] = lst[min_ind], lst[i]
+    lst = [str(el) for el in lst]
+    return " ".join(lst)
+
 
 file_out.write(selection_sort(n, lst))
