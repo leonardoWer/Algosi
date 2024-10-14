@@ -1,7 +1,6 @@
 """
 Поиск максимальной прибыли
 """
-from functools import lru_cache
 
 file_in = open("../txtfiles/gzp.txt").read().split("\n")
 file_out = open("../txtfiles/output.txt", "w")
@@ -18,7 +17,7 @@ for s in file_in:
 
 def max_podposl(name: str, lst: list, price_list: list)->str:
     """
-    - Принимает на вход список со списками, в которых дата и цена соответственно
+    - Принимает на вход список со списками, в которых дата и цена соответственно, и список только с ценами в том же порядке, для удобного выбора п\п
     - Ищет максимальную подпоследовательность
     - Разница между первым и последним элементом максимальна
     - Возвращает: дату покупки, выручку, дату продажи
@@ -34,6 +33,10 @@ def max_podposl(name: str, lst: list, price_list: list)->str:
 
 
 def find_max_subarray(lst: list, low: int = 0, high: int = len(lst) - 1):
+    """
+    - Алгоритм поиска максимального подмассива, в случаях, если он находится слева или справа от середины
+    - Вызывает другую функцию поиска максимальной п\п в случае, если п\п пересекает середину
+    """
     if low == high:
         return low, high, abs(lst[low] - lst[high])
     else:
@@ -51,6 +54,9 @@ def find_max_subarray(lst: list, low: int = 0, high: int = len(lst) - 1):
 
 
 def find_max_cross_subarray(lst: list, low: int, mid: int, high: int):
+    """
+    - Алгоритм поиска п\п в случае, если п\п пересекает середину
+    """
     max_left, max_right = 0,0
     left_sum = -10 ** 6
     sum = 0
@@ -67,6 +73,7 @@ def find_max_cross_subarray(lst: list, low: int, mid: int, high: int):
         if sum > right_sum:
             right_sum = sum
             max_right = j
+
     return max_left, max_right, abs(lst[max_left] - lst[max_right])
 
 
