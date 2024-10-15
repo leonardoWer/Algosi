@@ -9,51 +9,55 @@ n = int(file_in.readline())  # Количество элементов
 lst = list(map(int, file_in.readline().split()))  # Список с элементами
 
 
-def merge_sort(lst: list) -> list:
+def merge_sort(lst: list, left: int, right: int) -> list:
     """
-    Рекурсивная функция
-    - Разбивает массив на маленькие части, чтобы сократить количество операций
-    - Сортирует каждую часть
-    - Возвращает отсортированный массив, с помощью процедуры merge
+
     """
-    n = len(lst)
-    n1 = n // 2  # Выбираем первую половину массива
-    lst1 = lst[:n1]  # Делим массив на два, примерно равной длины
-    lst2 = lst[n1:]
-    if len(lst1) > 1:
-        lst1 = merge_sort(lst1)
-    if len(lst2) > 1:
-        lst2 = merge_sort(lst2)
+    if left < right:
+        mid = (right + left) // 2
+        merge_sort(lst, left, mid)
+        merge_sort(lst, mid + 1, right)
+        merge(lst, left, mid, right)
 
-    return merge(lst1, lst2)  # Если делить больше некуда, объединяем списки
+    return lst
 
 
-def merge(lst1: list, lst2: list) -> list:
+def merge(lst: list, left: int, mid: int, right: int) -> list:
     """
     Сливает два отсортированных массива в один
     """
-    i_f, i_j, v_f, v_j = 0, 0, 0, 0
-    res = []
-    lst1_len = len(lst1)
-    lst2_len = len(lst2)
-    i, j = 0, 0  # Начинаем сравнивать элементы с 0
-    while i < lst1_len and j < lst2_len:  # Пока не дойдём до конца списков
-        if lst1[i] <= lst2[j]:
-            res.append(lst1[i])
-            i += 1  # Поскольку добавили предыдущий элемент, больше его не сравниваем
+    left_lst = lst[left:mid + 1]
+    right_lst = lst[mid + 1:right + 1]
+
+    left_ind, right_ind = 0, 0
+
+    for k in range(left, right + 1):
+        if left_ind < len(left_lst) and right_ind < len(right_lst):
+            if left_lst[left_ind] <= right_lst[right_ind]:
+                lst[k] = left_lst[left_ind]
+                left_ind += 1
+            else:
+                lst[k] = right_lst[right_ind]
+                right_ind += 1
+
+        elif left_ind < len(left_lst):
+            lst[k] = left_lst[left_ind]
+            left_ind += 1
         else:
-            res.append(lst2[j])
-            j += 1
-    res += lst1[i:] + lst2[j:]  # Добавляем оставшиеся элементы
+            lst[k] = right_lst[right_ind]
+            right_ind += 1
 
-    return res
+    add_merge_description(left + 1, right + 1, lst[left], lst[right])
+    return lst
 
-def add_merge_describtion(i:int ,j:int ,v_i:int ,v_j:int):
+
+def add_merge_description(i: int, j: int, v_i: int, v_j: int):
     """
     Записывает в файл промежуточные операции сортировки слиянием
     """
     file_out.write(f"{i} {j} {v_i} {v_j}\n")
 
 
-res = " ".join([str(el) for el in merge_sort(lst)])  # Список с результатом приводим к строке и записываем в файл
+res = " ".join(
+    [str(el) for el in merge_sort(lst, 0, n - 1)])  # Список с результатом приводим к строке и записываем в файл
 file_out.write(res)
