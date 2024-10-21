@@ -1,5 +1,5 @@
 """
-Сортировка слиянием +
+Алгоритм подсчёта количества инверсий
 """
 
 file_in = open("../txtfiles/input.txt")
@@ -8,31 +8,37 @@ file_out = open("../txtfiles/output.txt", "w")
 n = int(file_in.readline())  # Количество элементов
 lst = list(map(int, file_in.readline().split()))  # Список с элементами
 
+def find_inverse(n:int, lst:list)->str:
+    """
+    Функция находит количество инверсий в списке, используя сортировку слиянием
+    """
+    cnt_inverse = merge_sort(lst,0,n-1)
 
-def merge_sort(lst: list, left: int, right: int)->list:
+    return str(cnt_inverse)
+
+
+def merge_sort(lst: list, left: int, right: int)->int:
     """
-     - Рекурсивная функция
+     Рекурсивная функция
     """
+    cnt = 0
     if left < right:
         # Находим середину
         mid = (right + left) // 2
         # Рекурсивно разделяем массив
-        merge_sort(lst, left, mid)
-        merge_sort(lst, mid + 1, right)
+        cnt += merge_sort(lst, left, mid)
+        cnt += merge_sort(lst, mid + 1, right)
         # Сливаем массив
-        merge(lst, left, mid, right)
+        cnt += merge(lst, left, mid, right)
 
-        if __name__ == "__main__":
-            add_merge_description(left+1, right+1, lst[left], lst[right])
-        else:
-            print(left+1, right+1, lst[left], lst[right])
+    return cnt
 
-    return lst
 
-def merge(lst: list, left: int, mid: int, right: int):
+def merge(lst: list, left: int, mid: int, right: int)->int:
     """
     Сливает два отсортированных массива в один
     """
+    cnt = 0
     n1 = mid - left + 1
     n2 = right - mid
     left_lst = [0]*n1
@@ -53,6 +59,7 @@ def merge(lst: list, left: int, mid: int, right: int):
         else:
             lst[k] = right_lst[j]
             j += 1
+            cnt += (n1-i) # Добавляем к счётчику инверсий все случаи, когда текущий элемент больше последующих
         k += 1
 
     # Добавляем оставшиеся элементы
@@ -65,13 +72,7 @@ def merge(lst: list, left: int, mid: int, right: int):
         j += 1
         k += 1
 
+    return cnt
 
-def add_merge_description(i: int, j: int, v_i: int, v_j: int):
-    """
-    Записывает в файл промежуточные операции сортировки слиянием
-    """
-    file_out.write(f"{i} {j} {v_i} {v_j}\n")
 
-if __name__ == "__main__":
-    res = " ".join([str(el) for el in merge_sort(lst, 0, n-1)])  # Список с результатом приводим к строке и записываем в файл
-    file_out.write(res)
+file_out.write(find_inverse(n, lst))
