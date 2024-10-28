@@ -3,11 +3,13 @@ from lab2 import utils
 import datetime
 import tracemalloc
 
-n, lst = utils.read_file()
+
 
 
 def test_baza(func, lst, n):
     # На данных из примера
+    n, lst = utils.read_file()
+
     print("Просчитаем время и память работы сортировки")
     tracemalloc.start()  # Запускаем счётчик памяти
     start_time = datetime.datetime.now()  # Запускаем счётчик времени
