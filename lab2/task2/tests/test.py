@@ -1,13 +1,10 @@
 from lab2.task2.src.task2 import merge_sort
+from lab2 import utils
 import datetime
 import tracemalloc
 
 
-file_in = open("../txtfiles/input.txt")
-file_out = open("../txtfiles/output.txt", "w")
-
-n = int(file_in.readline())  # Количество элементов
-lst = list(map(int, file_in.readline().split()))  # Список с элементами
+n, lst = utils.read_file()
 
 
 # На данных из примера

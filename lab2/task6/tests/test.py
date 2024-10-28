@@ -16,11 +16,11 @@ for s in file_in:
     price_lst.append(price)
 
 
-print("Просчитаем время и память работы алгоритма поиска максимальной п\п")
+print("\n"+"Просчитаем время и память работы алгоритма поиска максимальной п\п")
 tracemalloc.start() # Запускаем счётчик памяти
 start_time = datetime.datetime.now() # Запускаем счётчик времени
 
-print(max_podposl("Газпром",lst, price_lst), "\n")
+max_podposl("Газпром",lst, price_lst), "\n"
 
 finish_time = datetime.datetime.now() # Измеряем время конца работы
 print("Итоговое время:",finish_time - start_time) # Выводим итоговое время

@@ -1,18 +1,12 @@
 from lab2.task4.src.task4 import bin_search
+from lab2 import utils
 import datetime
 import tracemalloc
 
 file_in = open("../txtfiles/input.txt")
 
 # Данные из примера
-a = list(map(int, file_in.readline().split()))
-b = list(map(int, file_in.readline().split()))
-
-n = a[0]  # Количество элементов массива
-a.remove(a[0])  # Массив
-
-k = b[0]  # Количество элементов поиска
-b.remove(k)  # Элементы поиска
+n, a, k, b = utils.read_file_4()
 
 tracemalloc.start() # Запускаем счётчик памяти
 start_time = datetime.datetime.now() # Запускаем счётчик времени
