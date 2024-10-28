@@ -2,19 +2,10 @@
 Бинарный поиск
 """
 
-file_in = open("../txtfiles/input.txt")
-file_out = open("../txtfiles/output.txt", "w")
+from lab2 import utils
 
-a = list(map(int, file_in.readline().split()))
-b = list(map(int, file_in.readline().split()))
 
-n = a[0]  # Количество элементов массива
-a.remove(a[0])  # Массив
-
-k = b[0]  # Количество элементов поиска
-b.remove(k)  # Элементы поиска
-
-def bin_search(n: int, lst: list, k: int, find_el_list: list) -> str:
+def bin_search(n: int, lst: list, k: int, find_el_list: list) -> list:
     """
     - Делим массив на маленькие части, среди которых выполняем поиск
     - Находим серединный элемент, сравниваем с тем, что ищем
@@ -38,8 +29,11 @@ def bin_search(n: int, lst: list, k: int, find_el_list: list) -> str:
                 low = mid + 1
         if not el_is_find:
             res.append(-1)
-    res = [str(el) for el in res]
-    return " ".join(res)
+
+    return res
 
 
-file_out.write(bin_search(n, a, k, b))
+if __name__ == "__main__":
+    n, a, k, b = utils.read_file_4()
+    res = bin_search(n, a, k, b)
+    utils.write_file([res])
