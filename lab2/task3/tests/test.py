@@ -1,11 +1,9 @@
 from lab2.task3.src.task3 import find_inverse
+from lab2 import utils
 import datetime
 import tracemalloc
 
-file_in = open("../txtfiles/input.txt")
-
-n = int(file_in.readline()) #Количество элементов
-lst = list(map(int, file_in.readline().split())) #Список с элементами
+n, lst = utils.read_file()
 
 tracemalloc.start() # Запускаем счётчик памяти
 start_time = datetime.datetime.now() # Запускаем счётчик времени
