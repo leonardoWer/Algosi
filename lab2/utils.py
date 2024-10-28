@@ -17,6 +17,7 @@ def read_file() -> (int, list):
     file_in = open(path)
     variable_1 = int(file_in.readline())
     variable_2 = list(map(int, file_in.readline().split()))
+
     return variable_1, variable_2
 
 
@@ -38,3 +39,19 @@ def write_file(data: list):
             file_out.write(el)
         if len(data) > 1 and data[-1] != el:
             file_out.write("\n")
+
+
+def read_file_4() -> (int, list, int, list):
+    """
+    Функция считывает данные с файла
+     - В файле построчно должны быть: (чило, список, числоб список)
+     - Возвращает: (число, список, число, список)
+    """
+    path = import_path + "input.txt"
+    file_in = open(path)
+    variable_1 = int(file_in.readline())
+    variable_2 = list(map(int, file_in.readline().split()))
+    variable_3 = int(file_in.readline())
+    variable_4 = list(map(int, file_in.readline().split()))
+
+    return variable_1, variable_2, variable_3, variable_4
