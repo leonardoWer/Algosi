@@ -5,8 +5,6 @@ import datetime
 import tracemalloc
 import random
 
-n, lst = utils.read_file()
-
 
 # На данных из примера
 def test_sort(func, lst):
@@ -22,9 +20,6 @@ def test_sort(func, lst):
     current, peak = tracemalloc.get_traced_memory()  # Присваеваем двум переменным память, используемую сейчас, и на пике
     print(
         f"Используемая память: {current / 10 ** 6} МБ\nПамять на пике: {peak / 10 ** 6} МБ\n")  # Выводим время работы в мегабайтах
-
-
-test_sort(merge_sort, lst)
 
 
 # На самых больших данных
@@ -43,9 +38,6 @@ def test_sort_hard(func):
     current, peak = tracemalloc.get_traced_memory()  # Присваеваем двум переменным память, используемую сейчас, и на пике
     print(
         f"Используемая память: {current / 10 ** 6} МБ\nПамять на пике: {peak / 10 ** 6} МБ\n")  # Выводим время работы в мегабайтах
-
-
-# test_sort_hard(merge_sort)
 
 
 # Сравнение сортировок на средних данных
@@ -80,9 +72,6 @@ def vs_test_middle(func1, func2):
         f"Используемая память: {current / 10 ** 6} МБ\nПамять на пике: {peak / 10 ** 6} МБ\n")  # Выводим время работы в мегабайтах
 
 
-# vs_test_middle(merge_sort, insertion_sort)
-
-
 # Сравнение сортировок на больших данных
 def vs_test_hard(func1, func2):
     lst_hud = [random.randint(1, 1_000_000) for i in range(8_000)]
@@ -114,4 +103,10 @@ def vs_test_hard(func1, func2):
     print(
         f"Используемая память: {current / 10 ** 6} МБ\nПамять на пике: {peak / 10 ** 6} МБ\n")  # Выводим время работы в мегабайтах
 
-# vs_test_hard(merge_sort, insertion_sort)
+
+if __name__ == "__main__":
+    n, lst = utils.read_file()
+    test_sort(merge_sort, lst)
+    test_sort_hard(merge_sort)
+    vs_test_middle(merge_sort, insertion_sort)
+    vs_test_hard(merge_sort, insertion_sort)
