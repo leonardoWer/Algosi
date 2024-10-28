@@ -36,5 +36,5 @@ def write_file(data: list):
             file_out.write(str(el))
         elif type(el) == str:
             file_out.write(el)
-        if len(data) > 1:
+        if len(data) > 1 and data[-1] != el:
             file_out.write("\n")
