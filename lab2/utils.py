@@ -3,6 +3,9 @@
  - Чтение файла input.txt
  - Запись в файл output.txt
 """
+import tracemalloc
+import datetime
+from os import close
 
 import_path = "../txtfiles/"
 
@@ -17,6 +20,7 @@ def read_file() -> (int, list):
     file_in = open(path)
     variable_1 = int(file_in.readline())
     variable_2 = list(map(int, file_in.readline().split()))
+    file_in.close()
 
     return variable_1, variable_2
 
@@ -39,6 +43,7 @@ def write_file(data: list):
             file_out.write(el)
         if len(data) > 1 and data[-1] != el:
             file_out.write("\n")
+    file_out.close()
 
 
 def read_file_4() -> (int, list, int, list):
@@ -53,5 +58,6 @@ def read_file_4() -> (int, list, int, list):
     variable_2 = list(map(int, file_in.readline().split()))
     variable_3 = int(file_in.readline())
     variable_4 = list(map(int, file_in.readline().split()))
+    file_in.close()
 
     return variable_1, variable_2, variable_3, variable_4
