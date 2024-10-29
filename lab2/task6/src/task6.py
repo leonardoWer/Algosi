@@ -78,6 +78,6 @@ def find_max_cross_subarray(lst: list, low: int, mid: int, high: int):
 
     return max_left, max_right, abs(lst[max_left] - lst[max_right])
 
+if __name__ == "__main__":
+    print(max_podposl("Газпром", lst, price_lst))
 
-# utils.write_file([max_podposl("Газпром", lst, price_lst)])
-print(max_podposl("Газпром", lst, price_lst))
