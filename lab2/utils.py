@@ -3,9 +3,6 @@
  - Чтение файла input.txt
  - Запись в файл output.txt
 """
-import tracemalloc
-import datetime
-from os import close
 
 import_path = "../txtfiles/"
 
