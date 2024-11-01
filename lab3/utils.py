@@ -81,7 +81,10 @@ def test_memory_and_time_lst(lst: list, func, need_print:bool):
 
     func(lst)
     if need_print:
-        print(func(lst))
+        if func(lst) is not None:
+            print(func(lst))
+        else:
+            print(lst)
 
     finish_time = datetime.datetime.now()  # Измеряем время конца работы
     print("Итоговое время:", finish_time - start_time)  # Выводим итоговое время
@@ -104,7 +107,10 @@ def test_memory_and_time_lst_n(lst: list, n: int, func, need_print:bool):
 
     func(lst, 0, n - 1)
     if need_print:
-        print(func(lst, 0, n - 1))
+        if func(lst, 0, n - 1) is not None:
+            print(func(lst, 0, n - 1))
+        else:
+            print(lst)
 
     finish_time = datetime.datetime.now()  # Измеряем время конца работы
     print("Итоговое время:", finish_time - start_time)  # Выводим итоговое время
