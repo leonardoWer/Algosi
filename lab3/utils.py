@@ -34,6 +34,8 @@ def write_file(data: list):
         if type(el) == list:
             res = " ".join([str(i) for i in el])  # Список с результатом приводим к строке и записываем в файл
             file_out.write(res)
+            if len(data) > 1 and data[-1] == el and type(data[-1]) == list:
+                file_out.write("\n")
         elif type(el) == int:
             file_out.write(str(el))
         elif type(el) == str:
