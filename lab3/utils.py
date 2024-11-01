@@ -4,8 +4,12 @@
  - Запись в файл output.txt
 """
 
+import datetime
+import tracemalloc
+
 import_path = "../txtfiles/"
 
+# Функции для работы с файлами
 
 def read_file() -> (int, list):
     """
@@ -60,3 +64,51 @@ def read_file_4() -> (int, list, int, list):
     file_in.close()
 
     return variable_1, variable_2, variable_3, variable_4
+
+
+# Функции для тестов времени и памяти для разных функций
+
+def test_memory_and_time_lst(lst: list, func, need_print:bool):
+    """
+    Выводит затрачиваемое время и память для сортировки
+    - Формат входных данных вызова: (список, функция, нужно ли выводить результат)
+    - Формат входных данных для функции (список)
+    - Результат функции не выводит
+    """
+    print(f"Просчитаем время и память работы Сортировки {func} худшем случае")
+    tracemalloc.start()  # Запускаем счётчик памяти
+    start_time = datetime.datetime.now()  # Запускаем счётчик времени
+
+    func(lst)
+    if need_print:
+        print(func(lst))
+
+    finish_time = datetime.datetime.now()  # Измеряем время конца работы
+    print("Итоговое время:", finish_time - start_time)  # Выводим итоговое время
+
+    current, peak = tracemalloc.get_traced_memory()  # Присваеваем двум переменным память, используемую сейчас, и на пике
+    print(
+        f"Используемая память: {current / 10 ** 6} МБ\nПамять на пике: {peak / 10 ** 6} МБ\n")  # Выводим время работы в мегабайтах
+
+
+def test_memory_and_time_lst_n(lst: list, n: int, func, need_print:bool):
+    """
+    Выводит затрачиваемое время и память для сортировки
+    - Формат входных данных вызова: (список, количество элементов, функция, нужно ли выводить результат)
+    - Формат входных данных для функции (список, левый, правый)
+    - Результат функции не выводит
+    """
+    print(f"Просчитаем время и память работы Сортировки {func} худшем случае")
+    tracemalloc.start()  # Запускаем счётчик памяти
+    start_time = datetime.datetime.now()  # Запускаем счётчик времени
+
+    func(lst, 0, n - 1)
+    if need_print:
+        print(func(lst, 0, n - 1))
+
+    finish_time = datetime.datetime.now()  # Измеряем время конца работы
+    print("Итоговое время:", finish_time - start_time)  # Выводим итоговое время
+
+    current, peak = tracemalloc.get_traced_memory()  # Присваеваем двум переменным память, используемую сейчас, и на пике
+    print(
+        f"Используемая память: {current / 10 ** 6} МБ\nПамять на пике: {peak / 10 ** 6} МБ\n")  # Выводим время работы в мегабайтах
