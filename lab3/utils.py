@@ -89,7 +89,7 @@ def test_memory_and_time_lst(lst: list, func, need_print:bool):
     - Формат входных данных для функции (список)
     - Результат функции не выводит
     """
-    print(f"Просчитаем время и память работы Сортировки {func} худшем случае")
+    print(f"Просчитаем время и память работы Сортировки {func}")
     tracemalloc.start()  # Запускаем счётчик памяти
     start_time = datetime.datetime.now()  # Запускаем счётчик времени
 
@@ -115,7 +115,7 @@ def test_memory_and_time_lst_n(lst: list, n: int, func, need_print:bool):
     - Формат входных данных для функции (список, левый, правый)
     - Результат функции не выводит
     """
-    print(f"Просчитаем время и память работы Сортировки {func} худшем случае")
+    print(f"Просчитаем время и память работы Сортировки {func}")
     tracemalloc.start()  # Запускаем счётчик памяти
     start_time = datetime.datetime.now()  # Запускаем счётчик времени
 
