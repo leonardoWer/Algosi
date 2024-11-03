@@ -28,6 +28,7 @@ def make_lottery_data(file_name:str) -> (int, int, list[int], list[int]):
                 list_with_segments.append(int(el))
 
     list_with_dots = list(map(int, file_in.readline().split()))
+    file_in.close()
 
     return cnt_segment, cnt_dot, list_with_segments, list_with_dots
 
