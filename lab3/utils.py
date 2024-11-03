@@ -14,7 +14,7 @@ import_path = "../txtfiles/"
 def read_file() -> (int, list):
     """
     Функция считывает данные с файла
-     - В файле построчно должны быть: (чило, список)
+     - В файле построчно должны быть: (число, список)
      - Возвращает: (число, список)
     """
     path = import_path + "input.txt"
@@ -52,7 +52,7 @@ def write_file(data: list):
 def read_file_4() -> (int, list, int, list):
     """
     Функция считывает данные с файла
-     - В файле построчно должны быть: (чило, список, числоб список)
+     - В файле построчно должны быть: (число, список, число список)
      - Возвращает: (число, список, число, список)
     """
     path = import_path + "input.txt"
@@ -64,6 +64,20 @@ def read_file_4() -> (int, list, int, list):
     file_in.close()
 
     return variable_1, variable_2, variable_3, variable_4
+
+
+def read_file_1() -> int:
+    """
+    Функция считывает данные с файла
+     - В файле построчно должны быть: число
+     - Возвращает: число
+    """
+    path = import_path + "input.txt"
+    file_in = open(path)
+    variable_1 = int(file_in.readline())
+    file_in.close()
+
+    return variable_1
 
 
 # Функции для тестов времени и памяти для разных функций
