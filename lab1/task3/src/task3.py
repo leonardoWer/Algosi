@@ -2,21 +2,23 @@
 Сортировка вставкой в невозрастающем(убывающем) порядке
 """
 
-file_in = open("../txtfiles/input.txt")
-file_out = open("../txtfiles/output.txt", "w")
+from lab1 import utils
 
-n = int(file_in.readline())  # Количество элементов
-lst = list(map(int, file_in.readline().split()))  # Список с элементами
 
-def insertion_sort(n:int, lst:list) ->str:
+def reverse_insertion_sort(n:int, lst:list) -> list:
+    """ Сортировка вставкой в порядке убывания"""
     for i in range(1, n):
         key = lst[i]
         j = i-1
-        while (j>=0) and (lst[j]<key): # Поменялся знак неравенства, теперь нам подходит случай, когда предыдущий элеиент меньше чем ключ
+        while (j>=0) and (lst[j]<key): # Поменялся знак неравенства, теперь нам подходит случай, когда предыдущий элемент меньше чем ключ
             lst[j+1] = lst[j]
             j -=1
         lst[j+1] = key
-    lst = [str(el) for el in lst]
-    return " ".join(lst)
 
-file_out.write(insertion_sort(n, lst))
+    return lst
+
+
+if __name__ == "__main__":
+    n, lst = utils.read_file()
+    res = reverse_insertion_sort(n, lst)
+    utils.write_file([res])
