@@ -109,7 +109,6 @@ class TaskTest(unittest.TestCase):
         print(
             f"Используемая память: {current / 10 ** 6} МБ\nПамять на пике: {peak / 10 ** 6} МБ\n")  # Выводим время работы в мегабайтах
 
-
     def test_middle_insertion_vs_selection(self):
         # given
         lst_sr = [random.randint(1, 10_000) for j in range(2_000)]
