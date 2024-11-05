@@ -1,17 +1,15 @@
 """
-В графстве Сортленда нужно найти 3х человек
+В графстве Сортленда нужно найти 3-х человек
 - Самого бедного
 - Среднего достатка
 - Самого богатого
 """
 
-file_in = open("../txtfiles/input.txt")
-file_out = open("../txtfiles/output.txt", "w")
+from lab1 import utils
 
-n = int(file_in.readline())  # Количество жителей
-m = list(map(float, file_in.readline().split()))  # Список с состоянием житиелей, индексы жителей i+1
 
-def Sortland(n: int, m: list) -> str:
+def Sortland(n: int, m: list) -> list:
+    """ Графство Сортленд """
     win_list = []
 
     win_list.append(m.index(min(m)) + 1)
@@ -19,7 +17,13 @@ def Sortland(n: int, m: list) -> str:
     win_list.append(m.index(m_sort[len(m_sort) // 2]) + 1)
     win_list.append(m.index(max(m)) + 1)
 
-    win_list = [str(el) for el in win_list]
-    return " ".join(win_list)
+    return win_list
 
-file_out.write(Sortland(n,m))
+
+if __name__ == "__main__":
+    file_in = open("../txtfiles/input.txt")
+    n = int(file_in.readline())  # Количество жителей
+    m = list(map(float, file_in.readline().split()))  # Список с состоянием жителей, индексы жителей i+1
+
+    res = Sortland(n, m)
+    utils.write_file([res])
