@@ -5,7 +5,7 @@ import tracemalloc
 import unittest
 
 
-class TaskTest(unittest.TestCase):
+class TaskTest2(unittest.TestCase):
 
     def test_sort(self):
         """Тест на данных из примера"""

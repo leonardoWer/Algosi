@@ -4,12 +4,13 @@ import tracemalloc
 import unittest
 
 
-class TaskTest(unittest.TestCase):
+class TaskTest6(unittest.TestCase):
 
     def test_sort(self):
         """Тест на данных из примера"""
         # given
-        file_in = open("../txtfiles/gzp.txt")
+        abs_path = r"C:\Users\name8\PycharmProjects\Algosi\lab2\task6\txtfiles\gzp.txt"
+        file_in = open(abs_path)
         file = file_in.read().split("\n")
         lst = []
         price_lst = []
