@@ -5,7 +5,7 @@ import random
 import unittest
 
 
-class TaskTest(unittest.TestCase):
+class TaskTest1(unittest.TestCase):
 
     # Тест функции быстрой сортировки на данных из примера
     def test_quick_sort(self):
