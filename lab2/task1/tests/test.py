@@ -50,6 +50,10 @@ class TaskTest1(unittest.TestCase):
         print(
             f"Используемая память: {current / 10 ** 6} МБ\nПамять на пике: {peak / 10 ** 6} МБ\n")  # Выводим время работы в мегабайтах
 
+        # then
+        correct_res = sorted(lst_hud)
+        self.assertEqual(merge_sort(lst_hud), correct_res)
+
     def test_two_sorts_middle(self):
         """Сравнение двух сортировок на средних данных"""
         # given
@@ -83,6 +87,10 @@ class TaskTest1(unittest.TestCase):
         print(
             f"Используемая память: {current / 10 ** 6} МБ\nПамять на пике: {peak / 10 ** 6} МБ\n")  # Выводим время работы в мегабайтах
 
+        correct_res = sorted(lst_sr)
+        self.assertEqual(merge_sort(lst_sr), correct_res)
+        self.assertEqual(insertion_sort(n_sr, lst_sr), correct_res)
+
     def test_two_sorts_hard(self):
         """Сравнение двух сортировок на больших данных"""
         # given
@@ -114,6 +122,11 @@ class TaskTest1(unittest.TestCase):
         current, peak = tracemalloc.get_traced_memory()  # Присваеваем двум переменным память, используемую сейчас, и на пике
         print(
             f"Используемая память: {current / 10 ** 6} МБ\nПамять на пике: {peak / 10 ** 6} МБ\n")  # Выводим время работы в мегабайтах
+
+        # then
+        correct_res = sorted(lst_hud)
+        self.assertEqual(merge_sort(lst_hud), correct_res)
+        self.assertEqual(insertion_sort(n_hud, lst_hud), correct_res)
 
 if __name__ == "__main__":
     unittest.main()
