@@ -7,7 +7,7 @@ import random
 import unittest
 
 
-class TaskTest(unittest.TestCase):
+class TaskTest1(unittest.TestCase):
 
     def test_sort(self):
         """Тест на данных из примера"""
