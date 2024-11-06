@@ -4,7 +4,8 @@
 
 from lab2 import utils
 
-file_in = open("../txtfiles/gzp.txt").read().split("\n")
+abs_path = r"C:\Users\name8\PycharmProjects\Algosi\lab2\task6\txtfiles\gzp.txt"
+file_in = open(abs_path).read().split("\n")
 
 lst = []
 price_lst = []
