@@ -80,6 +80,20 @@ def read_file_1() -> int:
     return variable_1
 
 
+def read_file_1_list() -> list:
+    """
+    Функция считывает данные с файла
+     - В файле построчно должны быть: список
+     - Возвращает: список
+    """
+    path = import_path + "input.txt"
+    file_in = open(path)
+    variable_1 = list(map(int, file_in.readline().split()))
+    file_in.close()
+
+    return variable_1
+
+
 # Функции для тестов времени и памяти для разных функций
 
 def test_memory_and_time_lst(lst: list, func, need_print:bool):
