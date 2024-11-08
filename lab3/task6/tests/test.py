@@ -3,7 +3,7 @@ from lab3 import utils
 import unittest
 
 
-class TaskTest2(unittest.TestCase):
+class TaskTest6(unittest.TestCase):
 
     # Тест функции быстрой сортировки на данных из примера
     def test_quick_sort(self):
