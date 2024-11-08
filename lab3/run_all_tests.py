@@ -4,11 +4,10 @@ import unittest
 
 from lab3.task1.tests.test import TaskTest1
 from lab3.task2.tests.test import TaskTest2
+from lab3.task3.tests.test import TaskTest3
 from lab3.task4.tests.test import TaskTest4
-
-# from lab1.task4.tests.test import TaskTest3
-# from lab1.task5.tests.test import TaskTest5
-# from lab1.task6.tests.test import TaskTest6
+from lab3.task5.tests.test import TaskTest5
+from lab3.task6.tests.test import TaskTest6
 
 
 def create_suit():
