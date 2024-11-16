@@ -2,14 +2,14 @@
 Сортировка выбором
 """
 
-file_in = open("../txtfiles/input.txt")
-file_out = open("../txtfiles/output.txt", "w")
+from lab1 import utils
 
-n = int(file_in.readline()) # Количество элементов
-lst = list(map(int, file_in.readline().split())) # Список с элементами
 
-def selection_sort(n: int, lst: list) -> str:
+def selection_sort(n: int, lst: list) -> list:
     """
+    Функция сортировки выбором
+     Принимает: (количество элементов в списке, список)
+     Возвращает: отсортированный список
     - Проходимся по элементам массива, запоминаем элемент и его индекс
     - Выбираем минимальный и обновляем минимальный элемент и его индекс
     - Меняем минимальный элемент с первым местами
@@ -23,8 +23,11 @@ def selection_sort(n: int, lst: list) -> str:
                 min_ind = j
         if min_ind != i: # Обмен значениями
             lst[i], lst[min_ind] = lst[min_ind], lst[i]
-    lst = [str(el) for el in lst]
-    return " ".join(lst)
+
+    return lst
 
 
-file_out.write(selection_sort(n, lst))
+if __name__ == "__main__":
+    n, lst = utils.read_file()
+    res = selection_sort(n, lst)
+    utils.write_file([res])

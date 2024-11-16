@@ -2,11 +2,8 @@
 Алгоритм подсчёта количества инверсий
 """
 
-file_in = open("../txtfiles/input.txt")
-file_out = open("../txtfiles/output.txt", "w")
+from lab2 import utils
 
-n = int(file_in.readline())  # Количество элементов
-lst = list(map(int, file_in.readline().split()))  # Список с элементами
 
 def find_inverse(n:int, lst:list)->str:
     """
@@ -75,4 +72,7 @@ def merge(lst: list, left: int, mid: int, right: int)->int:
     return cnt
 
 
-file_out.write(find_inverse(n, lst))
+if __name__ == "__main__":
+    n, lst = utils.read_file()
+    res = find_inverse(n, lst)
+    utils.write_file([res])

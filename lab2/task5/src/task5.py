@@ -2,6 +2,9 @@
 Поиск элемента, который встречается в списке более n/2 раз
 """
 
+from lab2 import utils
+
+
 def find_el_bolsh(lst: list, n: int) -> str:
     """
     Функция записывает в файл результат поиска элемента большинства в списке:
@@ -10,8 +13,8 @@ def find_el_bolsh(lst: list, n: int) -> str:
     """
     el_bolsh = majority(lst, 0, n - 1)
     if el_bolsh != 0:
-        return "1\n"
-    return "0\n"
+        return "1"
+    return "0"
 
 
 def majority(lst: list, left: int, right: int):
@@ -44,14 +47,9 @@ def count_el(lst: list, left: int, right: int, finding_el: int):
             cnt += 1
     return cnt
 
+
 if __name__ == "__main__":
-    file_in = open("../txtfiles/input.txt")
-    file_out = open("../txtfiles/output.txt", "w")
-
-    n = int(file_in.readline())  # Количество элементов в 1 примере
-    lst = list(map(int, file_in.readline().split()))  # Список с элементами в 1 примере
-    n2 = int(file_in.readline())  # Количество элементов во 2 примере
-    lst2 = list(map(int, file_in.readline().split()))  # Список с элементами во 2 примере
-
-    file_out.write(find_el_bolsh(lst, n)) # Результат 1 примера
-    file_out.write(find_el_bolsh(lst2, n2)) # Результат 2 примера
+    n1, lst1, n2, lst2 = utils.read_file_4()
+    res1 = find_el_bolsh(lst1, n1)
+    res2 = find_el_bolsh(lst2, n2)
+    utils.write_file([res1, res2])

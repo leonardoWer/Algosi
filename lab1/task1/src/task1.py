@@ -2,13 +2,10 @@
 Сортировка вставкой базовая
 """
 
-file_in = open("../txtfiles/input.txt")
-file_out = open("../txtfiles/output.txt", "w")
+from lab1 import utils
 
-n = int(file_in.readline()) #Количество элементов
-lst = list(map(int, file_in.readline().split())) #Список с элементами
 
-def insertion_sort(n:int, lst:list) ->str:
+def insertion_sort(n: int, lst: list) -> list:
     """
     - Проходимся по элементам массива, выбирам ключ
     - Сравниваем элементы, исходя из чего подбираем предполагаемую позицию
@@ -16,12 +13,15 @@ def insertion_sort(n:int, lst:list) ->str:
     """
     for i in range(1, n):
         key = lst[i]
-        j = i-1
-        while (j>=0) and (lst[j]>key):
-            lst[j+1] = lst[j]
-            j -=1
-        lst[j+1] = key
-    lst = [str(el) for el in lst]
-    return " ".join(lst)
+        j = i - 1
+        while (j >= 0) and (lst[j] > key):
+            lst[j + 1] = lst[j]
+            j -= 1
+        lst[j + 1] = key
+    return lst
 
-file_out.write(insertion_sort(n, lst))
+
+if __name__ == "__main__":
+    n, lst = utils.read_file()
+    res = insertion_sort(n, lst)
+    utils.write_file([res])

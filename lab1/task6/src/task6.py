@@ -2,14 +2,14 @@
 Пузырьковая сортировка
 """
 
-file_in = open("../txtfiles/input.txt")
-file_out = open("../txtfiles/output.txt", "w")
+from lab1 import utils
 
-n = int(file_in.readline()) #Количество элементов
-lst = list(map(int, file_in.readline().split())) #Список с элементами
 
-def bubble_sort(n:int, lst:list) ->str:
+def bubble_sort(n:int, lst:list) -> list:
     """
+    Функция сортировки пузырьком
+     Принимает: (кол-во элементов, список)
+     Возвращает: отсортированный список
     - Проходимся по всем парам элементов массива
     - Если элементы в невозрастающем порядке - меняем их местами
     - "Всплывает" наибольший элемент
@@ -18,8 +18,11 @@ def bubble_sort(n:int, lst:list) ->str:
         for j in range(i+1, n):
             if lst[j] <= lst[i]:
                 lst[j], lst[i] = lst[i], lst[j]
-    lst = [str(el) for el in lst]
-    return " ".join(lst)
+
+    return lst
 
 
-file_out.write(bubble_sort(n, lst))
+if __name__ == "__main__":
+    n, lst = utils.read_file()
+    res = bubble_sort(n, lst)
+    utils.write_file([res])

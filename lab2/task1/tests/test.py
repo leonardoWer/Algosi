@@ -1,115 +1,132 @@
 from lab1.task1.src.task1 import insertion_sort
 from lab2.task1.src.task1 import merge_sort
+from lab2 import utils
 import datetime
 import tracemalloc
 import random
-
-file_in = open("../txtfiles/input.txt")
-file_out = open("../txtfiles/output.txt", "w")
-
-n = int(file_in.readline())  # Количество элементов
-lst = list(map(int, file_in.readline().split()))  # Список с элементами
-
-# На данных из примера
-def test_sort(func, lst):
-    print("Просчитаем время и память работы сортировки")
-    tracemalloc.start()  # Запускаем счётчик памяти
-    start_time = datetime.datetime.now()  # Запускаем счётчик времени
-
-    print(func(lst))
-
-    finish_time = datetime.datetime.now()  # Измеряем время конца работы
-    print("Итоговое время:", finish_time - start_time)  # Выводим итоговое время
-
-    current, peak = tracemalloc.get_traced_memory()  # Присваеваем двум переменным память, используемую сейчас, и на пике
-    print(f"Используемая память: {current / 10 ** 6} МБ\nПамять на пике: {peak / 10 ** 6} МБ\n")  # Выводим время работы в мегабайтах
-
-# test_sort(merge_sort, lst)
+import unittest
 
 
-# На самых больших данных
-def test_sort_hard(func):
-    lst_hud = [random.randint(1, 10**9) for i in range(10**5)]
+class TaskTest1(unittest.TestCase):
 
-    print(f"Просчитаем время и память работы Сортировки {func} в худшем случае")
-    tracemalloc.start()  # Запускаем счётчик памяти
-    start_time = datetime.datetime.now()  # Запускаем счётчик времени
+    def test_sort(self):
+        """Тест на данных из примера"""
+        # given
+        n, lst = utils.read_file()
 
-    func(lst_hud)
+        # when
+        print("Просчитаем время и память работы алгоритма")
+        tracemalloc.start()  # Запускаем счётчик памяти
+        start_time = datetime.datetime.now()  # Запускаем счётчик времени
 
-    finish_time = datetime.datetime.now()  # Измеряем время конца работы
-    print("Итоговое время:", finish_time - start_time)  # Выводим итоговое время
+        print(merge_sort(lst))
 
-    current, peak = tracemalloc.get_traced_memory()  # Присваеваем двум переменным память, используемую сейчас, и на пике
-    print(f"Используемая память: {current / 10 ** 6} МБ\nПамять на пике: {peak / 10 ** 6} МБ\n")  # Выводим время работы в мегабайтах
+        finish_time = datetime.datetime.now()  # Измеряем время конца работы
+        print("Итоговое время:", finish_time - start_time)  # Выводим итоговое время
 
-test_sort_hard(merge_sort)
+        current, peak = tracemalloc.get_traced_memory()  # Присваеваем двум переменным память, используемую сейчас, и на пике
+        print(
+            f"Используемая память: {current / 10 ** 6} МБ\nПамять на пике: {peak / 10 ** 6} МБ\n")  # Выводим время работы в мегабайтах
 
+        # then
+        self.assertEqual(merge_sort(lst), [1, 2, 3, 5, 6, 7, 7, 13])
 
-# Сравнение сортировок на средних данных
-def vs_test_middle(func1, func2):
-    lst_sr = [random.randint(1, 10_000) for j in range(2_000)]
-    n_sr = 2_000
+    def test_sort_hard(self):
+        """Тест сортировки на самых больших данных"""
+        # given
+        lst_hud = [random.randint(1, 10 ** 9) for i in range(10 ** 5)]
 
-    print(f"Просчитаем время и память работы Сортировки {func1} в среднем случае")
-    tracemalloc.start()  # Запускаем счётчик памяти
-    start_time = datetime.datetime.now()  # Запускаем счётчик времени
+        # when
+        print(f"Просчитаем время и память работы Сортировки слиянием в худшем случае")
+        tracemalloc.start()  # Запускаем счётчик памяти
+        start_time = datetime.datetime.now()  # Запускаем счётчик времени
 
-    func1(lst_sr)
+        merge_sort(lst_hud)
 
-    finish_time = datetime.datetime.now()  # Измеряем время конца работы
-    print("Итоговое время:", finish_time - start_time)  # Выводим итоговое время
+        finish_time = datetime.datetime.now()  # Измеряем время конца работы
+        print("Итоговое время:", finish_time - start_time)  # Выводим итоговое время
 
-    current, peak = tracemalloc.get_traced_memory()  # Присваеваем двум переменным память, используемую сейчас, и на пике
-    print(f"Используемая память: {current / 10 ** 6} МБ\nПамять на пике: {peak / 10 ** 6} МБ\n")  # Выводим время работы в мегабайтах
+        current, peak = tracemalloc.get_traced_memory()  # Присваеваем двум переменным память, используемую сейчас, и на пике
+        print(
+            f"Используемая память: {current / 10 ** 6} МБ\nПамять на пике: {peak / 10 ** 6} МБ\n")  # Выводим время работы в мегабайтах
 
+        # then
+        correct_res = sorted(lst_hud)
+        self.assertEqual(merge_sort(lst_hud), correct_res)
 
-    print(f"Просчитаем время и память работы Сортировки {func2} в среднем случае")
-    tracemalloc.start()  # Запускаем счётчик памяти
-    start_time = datetime.datetime.now()  # Запускаем счётчик времени
+    def test_two_sorts_middle(self):
+        """Сравнение двух сортировок на средних данных"""
+        # given
+        lst_sr = [random.randint(1, 10_000) for j in range(2_000)]
+        n_sr = 2_000
 
-    func2(n_sr, lst_sr)
+        # when
+        print(f"Просчитаем время и память работы Сортировки 1 в среднем случае")
+        tracemalloc.start()  # Запускаем счётчик памяти
+        start_time = datetime.datetime.now()  # Запускаем счётчик времени
 
-    finish_time = datetime.datetime.now()  # Измеряем время конца работы
-    print("Итоговое время:", finish_time - start_time)  # Выводим итоговое время
+        merge_sort(lst_sr)
 
-    current, peak = tracemalloc.get_traced_memory()  # Присваеваем двум переменным память, используемую сейчас, и на пике
-    print(
-        f"Используемая память: {current / 10 ** 6} МБ\nПамять на пике: {peak / 10 ** 6} МБ\n")  # Выводим время работы в мегабайтах
+        finish_time = datetime.datetime.now()  # Измеряем время конца работы
+        print("Итоговое время:", finish_time - start_time)  # Выводим итоговое время
 
-# vs_test_middle(merge_sort, insertion_sort)
+        current, peak = tracemalloc.get_traced_memory()  # Присваеваем двум переменным память, используемую сейчас, и на пике
+        print(
+            f"Используемая память: {current / 10 ** 6} МБ\nПамять на пике: {peak / 10 ** 6} МБ\n")  # Выводим время работы в мегабайтах
 
+        print(f"Просчитаем время и память работы Сортировки 2 в среднем случае")
+        tracemalloc.start()  # Запускаем счётчик памяти
+        start_time = datetime.datetime.now()  # Запускаем счётчик времени
 
-# Сравнение сортировок на больших данных
-def vs_test_hard(func1, func2):
-    lst_hud = [random.randint(1, 1_000_000) for i in range(8_000)]
-    n_hud = 8_000
+        insertion_sort(n_sr, lst_sr)
 
-    print(f"Просчитаем время и память работы Сортировки {func1} в худшем случае")
-    tracemalloc.start()  # Запускаем счётчик памяти
-    start_time = datetime.datetime.now()  # Запускаем счётчик времени
+        finish_time = datetime.datetime.now()  # Измеряем время конца работы
+        print("Итоговое время:", finish_time - start_time)  # Выводим итоговое время
 
-    func1(lst_hud)
+        current, peak = tracemalloc.get_traced_memory()  # Присваеваем двум переменным память, используемую сейчас, и на пике
+        print(
+            f"Используемая память: {current / 10 ** 6} МБ\nПамять на пике: {peak / 10 ** 6} МБ\n")  # Выводим время работы в мегабайтах
 
-    finish_time = datetime.datetime.now()  # Измеряем время конца работы
-    print("Итоговое время:", finish_time - start_time)  # Выводим итоговое время
+        correct_res = sorted(lst_sr)
+        self.assertEqual(merge_sort(lst_sr), correct_res)
+        self.assertEqual(insertion_sort(n_sr, lst_sr), correct_res)
 
-    current, peak = tracemalloc.get_traced_memory()  # Присваеваем двум переменным память, используемую сейчас, и на пике
-    print(f"Используемая память: {current / 10 ** 6} МБ\nПамять на пике: {peak / 10 ** 6} МБ\n")  # Выводим время работы в мегабайтах
+    def test_two_sorts_hard(self):
+        """Сравнение двух сортировок на больших данных"""
+        # given
+        lst_hud = [random.randint(1, 1_000_000) for i in range(8_000)]
+        n_hud = 8_000
 
+        print(f"Просчитаем время и память работы Сортировки 1 в худшем случае")
+        tracemalloc.start()  # Запускаем счётчик памяти
+        start_time = datetime.datetime.now()  # Запускаем счётчик времени
 
-    print(f"Просчитаем время и память работы Сортировки {func2} в худшем случае")
-    tracemalloc.start()  # Запускаем счётчик памяти
-    start_time = datetime.datetime.now()  # Запускаем счётчик времени
+        merge_sort(lst_hud)
 
-    func2(n_hud, lst_hud)
+        finish_time = datetime.datetime.now()  # Измеряем время конца работы
+        print("Итоговое время:", finish_time - start_time)  # Выводим итоговое время
 
-    finish_time = datetime.datetime.now()  # Измеряем время конца работы
-    print("Итоговое время:", finish_time - start_time)  # Выводим итоговое время
+        current, peak = tracemalloc.get_traced_memory()  # Присваеваем двум переменным память, используемую сейчас, и на пике
+        print(
+            f"Используемая память: {current / 10 ** 6} МБ\nПамять на пике: {peak / 10 ** 6} МБ\n")  # Выводим время работы в мегабайтах
 
-    current, peak = tracemalloc.get_traced_memory()  # Присваеваем двум переменным память, используемую сейчас, и на пике
-    print(f"Используемая память: {current / 10 ** 6} МБ\nПамять на пике: {peak / 10 ** 6} МБ\n")  # Выводим время работы в мегабайтах
+        print(f"Просчитаем время и память работы Сортировки 2 в худшем случае")
+        tracemalloc.start()  # Запускаем счётчик памяти
+        start_time = datetime.datetime.now()  # Запускаем счётчик времени
 
-# vs_test_hard(merge_sort, insertion_sort)
+        insertion_sort(n_hud, lst_hud)
 
+        finish_time = datetime.datetime.now()  # Измеряем время конца работы
+        print("Итоговое время:", finish_time - start_time)  # Выводим итоговое время
 
+        current, peak = tracemalloc.get_traced_memory()  # Присваеваем двум переменным память, используемую сейчас, и на пике
+        print(
+            f"Используемая память: {current / 10 ** 6} МБ\nПамять на пике: {peak / 10 ** 6} МБ\n")  # Выводим время работы в мегабайтах
+
+        # then
+        correct_res = sorted(lst_hud)
+        self.assertEqual(merge_sort(lst_hud), correct_res)
+        self.assertEqual(insertion_sort(n_hud, lst_hud), correct_res)
+
+if __name__ == "__main__":
+    unittest.main()
