@@ -26,7 +26,7 @@ def read_file() -> (int, list):
     return variable_1, variable_2
 
 
-def write_file(data: list):
+def write_file(data: list, repeat_el = False):
     """
     Функция записывает данные в файл
      - Принимает на вход список всех данных, которые нужно записать
@@ -46,6 +46,9 @@ def write_file(data: list):
             file_out.write(el)
         if len(data) > 1 and data[-1] != el:
             file_out.write("\n")
+        elif len(data) > 1 and repeat_el:
+            file_out.write("\n")
+
     file_out.close()
 
 
