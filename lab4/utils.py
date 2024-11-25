@@ -66,7 +66,7 @@ def read_file_4() -> (int, list, int, list):
     return variable_1, variable_2, variable_3, variable_4
 
 
-def read_file_1() -> int:
+def read_file_1_number() -> int:
     """
     Функция считывает данные с файла
      - В файле построчно должны быть: число
@@ -79,6 +79,18 @@ def read_file_1() -> int:
 
     return variable_1
 
+def read_file_1_str() -> str:
+    """
+    Функция считывает данные с файла
+     - В файле построчно должны быть: строка
+     - Возвращает: строку
+    """
+    path = import_path + "input.txt"
+    file_in = open(path)
+    variable_1 = str(file_in.readline())
+    file_in.close()
+
+    return variable_1
 
 def read_file_1_list() -> list:
     """
