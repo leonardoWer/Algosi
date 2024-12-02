@@ -83,11 +83,6 @@ class Utils:
         self.commands_cnt = int(data[0])
         self.commands_list = data[1:]
 
-        # with open("../txtfiles/input.txt", "r") as file:
-        #     self.commands_cnt = int(file.readline())
-        #     for i in range(self.commands_cnt):
-        #         self.commands_list.append(file.readline().strip())
-
     def fill_commands_list(self):
         """Заполняет список, в котором операция добавления или исключения элемента из стека
         соответствует команде"""
