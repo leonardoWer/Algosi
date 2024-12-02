@@ -4,7 +4,10 @@
 
 from lab4 import utils
 from collections import deque
+import os
 
+
+CURRENT_SCRIPT_DIR_PATH = os.path.dirname(os.path.abspath(__file__))
 
 def find_sliding_max(lst:list, n:int, m:int) -> list:
     """
@@ -31,10 +34,10 @@ def find_sliding_max(lst:list, n:int, m:int) -> list:
 
 def read_input_file() -> (list, int, int):
     """Считываем специфический инпут"""
-    with open("../txtfiles/input.txt", "r") as file:
-        n = int(file.readline().strip()) # Длина списка
-        lst = list(map(int, file.readline().strip().split())) # Список
-        m = int(file.readline().strip()) # Ширина окна
+    data = utils.read_file(CURRENT_SCRIPT_DIR_PATH)
+    n = int(data[0]) # Длина списка
+    lst = utils.str_to_list(data[1])
+    m = int(data[-1]) # Ширина окна
 
     return lst, n, m
 
@@ -42,6 +45,6 @@ def read_input_file() -> (list, int, int):
 if __name__ == "__main__":
     lst, n, m = read_input_file()
     result = find_sliding_max(lst, n, m)
-    utils.write_file([result])
+    utils.write_file(CURRENT_SCRIPT_DIR_PATH, [result])
 
 
