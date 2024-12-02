@@ -4,7 +4,10 @@
 
 from lab4 import utils
 from lab4.task1.src.task1 import Stack, Utils
+import os
 
+
+CURRENT_SCRIPT_DIR_PATH = os.path.dirname(os.path.abspath(__file__))
 
 class StackMax(Stack):
     def max(self):
@@ -20,7 +23,7 @@ class UtilsMax(Utils):
 
     def read_stack_data(self, input_file_name = "input.txt"):
         """Считывает данные для стека"""
-        with open("../txtfiles/" + input_file_name, "r") as file:
+        with open(os.path.join(CURRENT_SCRIPT_DIR_PATH, "../txtfiles/", input_file_name), "r") as file:
             self.commands_cnt = int(file.readline())
             for i in range(self.commands_cnt):
                 self.commands_list.append(file.readline().strip())
@@ -56,6 +59,6 @@ if __name__ == "__main__":
     stack_utils3.read_stack_data("input3.txt")  # Считываем данные из файла
     my_stack3, result3 = stack_utils3.fill_stack(my_stack3)  # Заполняем стек и получаем список с максимальными элементами
 
-    utils.write_file(["input 1:", result1, "\ninput 2:", result2, "\ninput 3:", result3])
+    utils.write_file(CURRENT_SCRIPT_DIR_PATH, ["input 1:", result1, "\ninput 2:", result2, "\ninput 3:", result3])
 
 
