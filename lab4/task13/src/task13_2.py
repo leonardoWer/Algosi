@@ -1,7 +1,10 @@
 """Очередь на основе связанного списка"""
 
 from lab4 import utils
+import os
 
+
+CURRENT_SCRIPT_DIR_PATH = os.path.dirname(os.path.abspath(__file__))
 
 class Node:
     """Содержит текущий элемент и ссылку на следующий"""
