@@ -5,7 +5,10 @@ top - индекс последнего добавленного элемент�
 """
 
 from lab4 import utils
+import os
 
+
+CURRENT_SCRIPT_DIR_PATH = os.path.dirname(os.path.abspath(__file__))
 
 class Node:
     """Содержит текущий элемент и ссылку на следующий"""
@@ -76,10 +79,14 @@ class Utils:
 
     def read_stack_data(self):
         """Считывает данные для стека"""
-        with open("../txtfiles/input.txt", "r") as file:
-            self.commands_cnt = int(file.readline())
-            for i in range(self.commands_cnt):
-                self.commands_list.append(file.readline().strip())
+        data = utils.read_file(CURRENT_SCRIPT_DIR_PATH)
+        self.commands_cnt = int(data[0])
+        self.commands_list = data[1:]
+
+        # with open("../txtfiles/input.txt", "r") as file:
+        #     self.commands_cnt = int(file.readline())
+        #     for i in range(self.commands_cnt):
+        #         self.commands_list.append(file.readline().strip())
 
     def fill_commands_list(self):
         """Заполняет список, в котором операция добавления или исключения элемента из стека
@@ -112,4 +119,4 @@ if __name__ == "__main__":
     my_stack, result = stack_utils.fill_stack(my_stack) # Заполняем стек и получаем список с удалёнными элементами
 
     print(my_stack)
-    utils.write_file(result)
+    utils.write_file(CURRENT_SCRIPT_DIR_PATH, result)

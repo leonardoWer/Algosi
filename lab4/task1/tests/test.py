@@ -1,4 +1,3 @@
-from lab4 import utils
 import unittest
 from lab4.task1.src.task1 import Stack, Utils
 import tracemalloc
