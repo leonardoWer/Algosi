@@ -3,7 +3,10 @@
 """
 
 from lab4 import utils
+import os
 
+
+CURRENT_SCRIPT_DIR_PATH = os.path.dirname(os.path.abspath(__file__))
 
 class PatientQueue:
     """Очередь пациентов на основе списка"""
@@ -53,7 +56,7 @@ class ReadPatientData:
 
     def read_utils_data(self, input_file_name = "input.txt"):
         """Считывает данные для стека"""
-        with open("../txtfiles/" + input_file_name, "r") as file:
+        with open(os.path.join(CURRENT_SCRIPT_DIR_PATH, "../txtfiles/", input_file_name), "r") as file:
             self.commands_cnt = int(file.readline())
             for i in range(self.commands_cnt):
                 self.patients_list.append(file.readline().strip())
@@ -89,4 +92,4 @@ if __name__ == "__main__":
     queue2, result2 = queue_utils2.fill_queue(queue2)
 
     result = ["input1"] + result1 + ["\ninput2"] + result2
-    utils.write_file(result)
+    utils.write_file(CURRENT_SCRIPT_DIR_PATH, result)
