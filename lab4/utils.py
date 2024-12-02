@@ -29,6 +29,12 @@ def read_file(path:str = INPUT_RELATIVE_PATH):
 
     return result
 
+def str_to_list(text:str) -> list:
+    """
+    Принимает строку вида: "1 2 3 4 5 6 7 8"
+    Возвращает список: [1,2,3,4,5,6,7,8]
+    """
+    return list(map(int, text.split()))
 
 def write_file(path:str = OUTPUT_RELATIVE_PATH, data: list = None, repeat_el = False):
     """
