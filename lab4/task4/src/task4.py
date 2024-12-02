@@ -3,6 +3,10 @@
 """
 
 from lab4 import utils
+import os
+
+
+CURRENT_SCRIPT_DIR_PATH = os.path.dirname(os.path.abspath(__file__))
 
 
 class BracketChecker:
@@ -40,19 +44,11 @@ class BracketChecker:
         return "Success"
 
 
-def read_file() -> list:
-    """Считывает все строки из файла"""
-    with open("../txtfiles/input.txt") as file:
-        lines_lst = (file.read().split("\n"))
-
-    return lines_lst
-
-
 if __name__ == "__main__":
     bracket_checker = BracketChecker()
-    lines_lst = read_file()
+    lines_lst = utils.read_file(CURRENT_SCRIPT_DIR_PATH)
     result = []
     for line in lines_lst:
         result.append(bracket_checker.check(line))
 
-    utils.write_file(result)
+    utils.write_file(CURRENT_SCRIPT_DIR_PATH, result)

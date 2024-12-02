@@ -1,9 +1,12 @@
-from lab4.task4.src.task4 import BracketChecker, read_file
+from lab4.task4.src.task4 import BracketChecker
 from lab4 import utils
 import unittest
 import tracemalloc
 import datetime
+import os
 
+
+CURRENT_SCRIPT_DIR_PATH = os.path.dirname(os.path.abspath(__file__))
 
 class TaskTest4(unittest.TestCase):
 
@@ -11,8 +14,8 @@ class TaskTest4(unittest.TestCase):
         """Тест на данных из примера"""
         # given
         bracket_checker = BracketChecker()
-        lines_lst = read_file()
-        first_line = utils.read_file_1_str()
+        lines_lst = utils.read_file(CURRENT_SCRIPT_DIR_PATH)
+        first_line = lines_lst[0]
 
         # when
         print(f"Просчитаем время и память работы bracket_checker")
