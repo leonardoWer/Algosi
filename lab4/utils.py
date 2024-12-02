@@ -6,34 +6,38 @@
 
 import datetime
 import tracemalloc
+import os
 
-import_path = "../txtfiles/"
+
+INPUT_RELATIVE_PATH = "../txtfiles/input.txt"
+OUTPUT_RELATIVE_PATH = "../txtfiles/output.txt"
 
 # Функции для работы с файлами
 
-def read_file() -> (int, list):
+def read_file(path:str = INPUT_RELATIVE_PATH):
     """
     Функция считывает данные с файла
-     - В файле построчно должны быть: (число, список)
-     - Возвращает: (число, список)
+     - Возвращает: (список строк с данными)
+     - В файле где будет использоваться функция нужно определить путь:
+     PATH = os.path.dirname(os.path.abspath(__file__))
     """
-    path = import_path + "input.txt"
-    file_in = open(path)
-    variable_1 = int(file_in.readline())
-    variable_2 = list(map(int, file_in.readline().split()))
-    file_in.close()
+    file_path = os.path.join(path, INPUT_RELATIVE_PATH)
+    result = []
+    with open(file_path, "r", encoding="utf8") as file_input:
+        for s in file_input:
+            result.append(s.strip())
 
-    return variable_1, variable_2
+    return result
 
 
-def write_file(data: list, repeat_el = False):
+def write_file(path:str = OUTPUT_RELATIVE_PATH, data: list = None, repeat_el = False):
     """
     Функция записывает данные в файл
      - Принимает на вход список всех данных, которые нужно записать
      - Записывает данные в файл
     """
-    path = import_path + "output.txt"
-    file_out = open(path, "w")
+    file_path = os.path.join(path, OUTPUT_RELATIVE_PATH)
+    file_out = open(file_path, "w", encoding="utf8")
     for el in data:
         if type(el) == list:
             res = " ".join([str(i) for i in el])  # Список с результатом приводим к строке и записываем в файл
@@ -50,63 +54,6 @@ def write_file(data: list, repeat_el = False):
             file_out.write("\n")
 
     file_out.close()
-
-
-def read_file_4() -> (int, list, int, list):
-    """
-    Функция считывает данные с файла
-     - В файле построчно должны быть: (число, список, число список)
-     - Возвращает: (число, список, число, список)
-    """
-    path = import_path + "input.txt"
-    file_in = open(path)
-    variable_1 = int(file_in.readline())
-    variable_2 = list(map(int, file_in.readline().split()))
-    variable_3 = int(file_in.readline())
-    variable_4 = list(map(int, file_in.readline().split()))
-    file_in.close()
-
-    return variable_1, variable_2, variable_3, variable_4
-
-
-def read_file_1_number() -> int:
-    """
-    Функция считывает данные с файла
-     - В файле построчно должны быть: число
-     - Возвращает: число
-    """
-    path = import_path + "input.txt"
-    file_in = open(path)
-    variable_1 = int(file_in.readline())
-    file_in.close()
-
-    return variable_1
-
-def read_file_1_str() -> str:
-    """
-    Функция считывает данные с файла
-     - В файле построчно должны быть: строка
-     - Возвращает: строку
-    """
-    path = import_path + "input.txt"
-    file_in = open(path)
-    variable_1 = str(file_in.readline())
-    file_in.close()
-
-    return variable_1
-
-def read_file_1_list() -> list:
-    """
-    Функция считывает данные с файла
-     - В файле построчно должны быть: список
-     - Возвращает: список
-    """
-    path = import_path + "input.txt"
-    file_in = open(path)
-    variable_1 = list(map(int, file_in.readline().split()))
-    file_in.close()
-
-    return variable_1
 
 
 # Функции для тестов времени и памяти для разных функций
