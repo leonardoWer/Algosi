@@ -32,7 +32,6 @@ class TaskTest4(unittest.TestCase):
         memory_used = current / 10 ** 6
 
         # then
-
         self.assertEqual(result, ['Success', 'Success', 'Success', 'Success', 1, 3, 'Success', 10])
         self.assertLessEqual(spent_time, max_allowed_time)
         self.assertLessEqual(memory_used, 256)
