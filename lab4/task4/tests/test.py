@@ -15,29 +15,26 @@ class TaskTest4(unittest.TestCase):
         # given
         bracket_checker = BracketChecker()
         lines_lst = utils.read_file(CURRENT_SCRIPT_DIR_PATH)
-        first_line = lines_lst[0]
+        max_allowed_time = datetime.timedelta(seconds=5)  # Задаю ограничение по времени
+        result = []
 
         # when
-        print(f"Просчитаем время и память работы bracket_checker")
         tracemalloc.start()  # Запускаем счётчик памяти
         start_time = datetime.datetime.now()  # Запускаем счётчик времени
 
-        print(bracket_checker.check(first_line))
-
-        finish_time = datetime.datetime.now()  # Измеряем время конца работы
-        print("Итоговое время:", finish_time - start_time)  # Выводим итоговое время
-
-        current, peak = tracemalloc.get_traced_memory()  # Присваеваем двум переменным память, используемую сейчас, и на пике
-        print(
-            f"Используемая память: {current / 10 ** 6} МБ\nПамять на пике: {peak / 10 ** 6} МБ\n")  # Выводим время работы в мегабайтах
-
-        result = []
         for line in lines_lst:
             result.append(bracket_checker.check(line))
 
-        # then
+        finish_time = datetime.datetime.now()  # Измеряем время конца работы
+        spent_time = finish_time - start_time  # Итоговое время
 
+        current, peak = tracemalloc.get_traced_memory()
+        memory_used = current / 10 ** 6
+
+        # then
         self.assertEqual(result, ['Success', 'Success', 'Success', 'Success', 1, 3, 'Success', 10])
+        self.assertLessEqual(spent_time, max_allowed_time)
+        self.assertLessEqual(memory_used, 256)
 
 
 if __name__ == "__main__":

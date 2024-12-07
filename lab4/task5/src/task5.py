@@ -41,7 +41,12 @@ class UtilsMax(Utils):
         return stack, max_el_list
 
 
-if __name__ == "__main__":
+def input_data():
+    """Возвращает входные данные"""
+    input_data = utils.read_file(CURRENT_SCRIPT_DIR_PATH)
+    return input_data
+
+def main():
     result = []
 
     my_stack1 = StackMax()  # Создаём стек
@@ -59,6 +64,11 @@ if __name__ == "__main__":
     stack_utils3.read_stack_data("input3.txt")  # Считываем данные из файла
     my_stack3, result3 = stack_utils3.fill_stack(my_stack3)  # Заполняем стек и получаем список с максимальными элементами
 
-    utils.write_file(CURRENT_SCRIPT_DIR_PATH, ["input 1:", result1, "\ninput 2:", result2, "\ninput 3:", result3])
+    return ["input 1:", result1, "\ninput 2:", result2, "\ninput 3:", result3]
+
+
+if __name__ == "__main__":
+    result = main()
+    utils.write_file(CURRENT_SCRIPT_DIR_PATH, result)
 
 

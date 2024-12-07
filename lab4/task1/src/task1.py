@@ -105,13 +105,20 @@ class Utils:
                 pop_el_list.append(stack.pop())
         return stack, pop_el_list
 
+def input_data():
+    """Возвращает входные данные"""
+    input_data = utils.read_file(CURRENT_SCRIPT_DIR_PATH)
+    return input_data
+
+def main():
+    my_stack = Stack()  # Создаём стек
+    stack_utils = Utils()  # Создаём утилс для считывания из файла
+    stack_utils.read_stack_data()  # Считываем данные из файла
+    stack_utils.fill_commands_list()  # Переделываем операции в команды
+    my_stack, result = stack_utils.fill_stack(my_stack)  # Заполняем стек и получаем список с удалёнными элементами
+
+    return result
 
 if __name__ == "__main__":
-    my_stack = Stack() # Создаём стек
-    stack_utils = Utils() # Создаём утилс для считывания из файла
-    stack_utils.read_stack_data()  # Считываем данные из файла
-    stack_utils.fill_commands_list() # Переделываем операции в команды
-    my_stack, result = stack_utils.fill_stack(my_stack) # Заполняем стек и получаем список с удалёнными элементами
-
-    print(my_stack)
+    result = main()
     utils.write_file(CURRENT_SCRIPT_DIR_PATH, result)

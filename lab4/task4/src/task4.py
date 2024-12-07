@@ -43,12 +43,21 @@ class BracketChecker:
 
         return "Success"
 
+def input_data():
+    """Возвращает входные данные"""
+    input_data = utils.read_file(CURRENT_SCRIPT_DIR_PATH)
+    return input_data
 
-if __name__ == "__main__":
+def main():
     bracket_checker = BracketChecker()
     lines_lst = utils.read_file(CURRENT_SCRIPT_DIR_PATH)
     result = []
     for line in lines_lst:
         result.append(bracket_checker.check(line))
 
+    return result
+
+
+if __name__ == "__main__":
+    result = main()
     utils.write_file(CURRENT_SCRIPT_DIR_PATH, result)

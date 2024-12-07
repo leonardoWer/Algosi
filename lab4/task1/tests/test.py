@@ -6,55 +6,94 @@ import datetime
 
 class TaskTest1(unittest.TestCase):
 
-    def test_stack(self):
-        """Тест стека"""
+    def test_stack_performance(self):
+        """Тест на время и память"""
         # given
-
-        # На примере
-        my_stack = Stack() # Создаём стек
-        stack_utils = Utils() # Создаём утилс для считывания из файла
-        stack_utils.read_stack_data()  # Считываем данные из файла
-
-        # Остальные случаи
-        stack1 = Stack()
-        stack2 = Stack()
+        my_stack = Stack()
+        stack_utils = Utils()
+        stack_utils.read_stack_data()
+        max_allowed_time = datetime.timedelta(seconds=2) # Задаю ограничение по времени
 
         # when
+        tracemalloc.start() # Запускаем счётчик памяти
+        start_time = datetime.datetime.now() # Запускаем счётчик времени
 
-        # На примере
-        print(f"Просчитаем время и память работы stack")
-        tracemalloc.start()  # Запускаем счётчик памяти
-        start_time = datetime.datetime.now()  # Запускаем счётчик времени
+        stack_utils.fill_commands_list() # Переделываем операции в команды
+        my_stack, result = stack_utils.fill_stack(my_stack) # Заполняем стек и получаем список с удалёнными элементами
 
-        stack_utils.fill_commands_list()  # Переделываем операции в команды
-        my_stack, result = stack_utils.fill_stack(my_stack)  # Заполняем стек и получаем список с удалёнными элементами
+        finish_time = datetime.datetime.now()
+        spent_time = finish_time - start_time # Итоговое время
 
-        finish_time = datetime.datetime.now()  # Измеряем время конца работы
-        print("Итоговое время:", finish_time - start_time)  # Выводим итоговое время
-
-        current, peak = tracemalloc.get_traced_memory()  # Присваеваем двум переменным память, используемую сейчас, и на пике
-        print(
-            f"Используемая память: {current / 10 ** 6} МБ\nПамять на пике: {peak / 10 ** 6} МБ\n")  # Выводим время работы в мегабайтах
-
-        # Остальные случаи
-        stack1.push(4)
-        stack1.push(8)
-        stack1.push(15)
-        stack1.push(16)
+        current, peak = tracemalloc.get_traced_memory()
+        memory_used = current / 10 ** 6
 
         # then
-        # На примере
         self.assertEqual(my_stack.__str__(),"2,1" )
+        self.assertLessEqual(spent_time, max_allowed_time)
+        self.assertLessEqual(memory_used, 256)
 
-        # Остальные случаи
-        self.assertEqual(stack1.__str__(), "16,15,8,4")
-        self.assertEqual(stack1.size, 4)
-        self.assertEqual(stack1.top(), 16)
-        self.assertEqual(stack1.is_empty(), False)
+    def test_stack_correctly(self):
+        """Тест на корректность работы стека"""
+        # given
+        my_stack = Stack()
+        empty_stack = Stack()
 
-        self.assertEqual(stack2.__str__(), "")
-        self.assertEqual(stack2.is_empty(), True)
-        self.assertEqual(stack2.size, 0)
+        # when
+        my_stack.push(4)
+        my_stack.push(8)
+        my_stack.push(15)
+        my_stack.push(16)
+
+        # then
+        self.assertEqual(my_stack.__str__(), "16,15,8,4")
+        self.assertEqual(empty_stack.__str__(), "")
+
+    def test_stack_is_empty(self):
+        """Тест на пустоту стека"""
+        # given
+        my_stack = Stack()
+        empty_stack = Stack()
+
+        # when
+        my_stack.push(4)
+        my_stack.push(8)
+        my_stack.push(15)
+        my_stack.push(16)
+
+        # then
+        self.assertEqual(my_stack.is_empty(), False)
+        self.assertEqual(empty_stack.is_empty(), True)
+
+    def test_stack_size(self):
+        """Тест на размер стека"""
+        # given
+        my_stack = Stack()
+        empty_stack = Stack()
+
+        # when
+        my_stack.push(4)
+        my_stack.push(8)
+        my_stack.push(15)
+        my_stack.push(16)
+
+        # then
+        self.assertEqual(my_stack.size, 4)
+        self.assertEqual(empty_stack.size, 0)
+
+    def test_stack_top(self):
+        """Тест на верхний элемент стека"""
+        # given
+        my_stack = Stack()
+        empty_stack = Stack()
+
+        # when
+        my_stack.push(4)
+        my_stack.push(8)
+        my_stack.push(15)
+        my_stack.push(16)
+
+        # then
+        self.assertEqual(my_stack.top(), 16)
 
 
 if __name__ == "__main__":

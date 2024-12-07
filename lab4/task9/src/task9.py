@@ -77,8 +77,12 @@ class ReadPatientData:
 
         return queue, pop_patients_list
 
+def input_data():
+    """Возвращает входные данные"""
+    input_data = utils.read_file(CURRENT_SCRIPT_DIR_PATH)
+    return input_data
 
-if __name__ == "__main__":
+def main():
     # Для первого инпута
     queue = PatientQueue()
     queue_utils = ReadPatientData()
@@ -92,4 +96,8 @@ if __name__ == "__main__":
     queue2, result2 = queue_utils2.fill_queue(queue2)
 
     result = ["input1"] + result1 + ["\ninput2"] + result2
+    return result
+
+if __name__ == "__main__":
+    result = main()
     utils.write_file(CURRENT_SCRIPT_DIR_PATH, result)

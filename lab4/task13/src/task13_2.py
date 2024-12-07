@@ -73,20 +73,22 @@ class Queue:
             return dequeued_element
 
 
-if __name__ == "__main__":
+def input_data():
+    """Возвращает входные данные"""
+    return [4, 8, 15, 16, 23, 42]
+
+
+def main():
     queue = Queue()
-    print(queue.is_empty())
 
-    for i in [4,8,15,16,23,42]:
+    for i in [4, 8, 15, 16, 23, 42]:
         queue.enqueue(i)
-
-    print(queue)
-    print(queue.is_empty())
-    print(queue.top())
 
     for i in range(queue.length()):
         queue.dequeue()
 
-    print(queue)
-    print(queue.is_empty())
-    print(queue.top())
+    return ""
+
+
+if __name__ == "__main__":
+    result = main()
