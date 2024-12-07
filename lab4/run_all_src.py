@@ -6,6 +6,7 @@ import sys
 
 
 def run_task(file_path):
+    """Запускает задание по переданному пути"""
     # Извлекаем имя файла без расширения
     task_name = os.path.basename(file_path).replace('.py', '')
 
@@ -17,10 +18,9 @@ def run_task(file_path):
 
     # Предполагаем, что в каждом файле есть функция main(), которая выполняет задание
     if hasattr(task_module, 'main'):
-        print(f"--- Выполняется {os.path.basename(os.path.dirname(__file__))} ---")
         input_data = task_module.input_data()  # Функция для получения входных данных
         output_data = task_module.main()  # Функция, которая возвращает результат
-        print(f"Задание {task_name}:")
+        print(f"\nЗадание {task_name}:")
         print(f"Входные данные: {input_data}")
         print(f"Результат: {output_data}")
     else:
@@ -28,6 +28,8 @@ def run_task(file_path):
 
 
 def main(lab_directory):
+    """Запускает все src в лабораторной"""
+    print(f"--- Выполняется {os.path.basename(os.path.dirname(__file__))} ---")
     # Проходим по всем папкам в lab_directory
     for root, dirs, files in os.walk(lab_directory):
         for file in files:
