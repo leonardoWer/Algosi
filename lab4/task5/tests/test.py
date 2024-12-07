@@ -7,63 +7,106 @@ import datetime
 
 class TaskTest5(unittest.TestCase):
 
-    def test_stack(self):
-        """Тест стека"""
+    def test_stack_performance(self):
+        """Тест на время и память"""
         # given
-        # На примере 1
-        my_stack = StackMax() # Создаём стек
-        stack_utils = UtilsMax() # Создаём утилс для считывания из файла
-        stack_utils.read_stack_data()  # Считываем данные из файла
-
-        # На примере 2
-        my_stack2 = StackMax()  # Создаём стек
-        stack_utils2 = UtilsMax()  # Создаём утилс для считывания из файла
-        stack_utils2.read_stack_data("input2.txt")  # Считываем данные из файла
-
-        # На примере 3
-        my_stack3 = StackMax()  # Создаём стек
-        stack_utils3 = UtilsMax()  # Создаём утилс для считывания из файла
-        stack_utils3.read_stack_data("input3.txt")  # Считываем данные из файла
+        my_stack = StackMax()
+        stack_utils = UtilsMax()
+        stack_utils.read_stack_data()
+        max_allowed_time = datetime.timedelta(seconds=5) # Задаю ограничение по времени
 
         # when
-
-        # На примере
-        print(f"Просчитаем время и память работы stack")
         tracemalloc.start()  # Запускаем счётчик памяти
         start_time = datetime.datetime.now()  # Запускаем счётчик времени
 
         my_stack, result = stack_utils.fill_stack(my_stack)  # Заполняем стек и получаем список с максимальными элементами
 
-        finish_time = datetime.datetime.now()  # Измеряем время конца работы
-        print("Итоговое время:", finish_time - start_time)  # Выводим итоговое время
+        finish_time = datetime.datetime.now()
+        spent_time = finish_time - start_time # Затраченное время
 
-        current, peak = tracemalloc.get_traced_memory()  # Присваеваем двум переменным память, используемую сейчас, и на пике
-        print(
-            f"Используемая память: {current / 10 ** 6} МБ\nПамять на пике: {peak / 10 ** 6} МБ\n")  # Выводим время работы в мегабайтах
+        current, peak = tracemalloc.get_traced_memory()
+        memory_used = current / 10 ** 6 # Затраченная память
 
-        # Остальные случаи
+        # then
+        self.assertEqual(my_stack.__str__(), "2")
+        self.assertEqual(result, [2, 2])
+        self.assertLessEqual(spent_time, max_allowed_time)
+        self.assertLessEqual(memory_used, 256)
+
+
+    def test_stack_correctly(self):
+        """Тест на корректность работы стека"""
+        # given
+        my_stack2 = StackMax()
+        stack_utils2 = UtilsMax()
+        stack_utils2.read_stack_data("input2.txt")
+
+        my_stack3 = StackMax()
+        stack_utils3 = UtilsMax()
+        stack_utils3.read_stack_data("input3.txt")
+
+        # when
         my_stack2, result2 = stack_utils2.fill_stack(my_stack2)
         my_stack3, result3 = stack_utils3.fill_stack(my_stack3)
 
         # then
-        # На примере
-        self.assertEqual(my_stack.__str__(),"2" )
-        self.assertEqual(result, [2, 2])
-        self.assertEqual(my_stack.top(), "2")
-        self.assertEqual(my_stack2.size, 1)
-        self.assertEqual(my_stack2.is_empty(), False)
-
-        # Остальные случаи
         self.assertEqual(my_stack2.__str__(), "1")
         self.assertEqual(result2, [2, 1])
-        self.assertEqual(my_stack2.size, 1)
-        self.assertEqual(my_stack2.top(), "1")
-        self.assertEqual(my_stack2.is_empty(), False)
-
         self.assertEqual(my_stack3.__str__(), "1")
         self.assertEqual(result3, [])
+
+
+    def test_stack_is_empty(self):
+        """Тест на пустоту стека"""
+        # given
+        my_stack2 = StackMax()
+        stack_utils2 = UtilsMax()
+        stack_utils2.read_stack_data("input2.txt")
+
+        my_stack3 = StackMax()
+        stack_utils3 = UtilsMax()
+        stack_utils3.read_stack_data("input3.txt")
+
+        # when
+        my_stack2, result2 = stack_utils2.fill_stack(my_stack2)
+        my_stack3, result3 = stack_utils3.fill_stack(my_stack3)
+
+        # then
+        self.assertEqual(my_stack2.is_empty(), False)
         self.assertEqual(my_stack3.is_empty(), False)
+
+    def test_stack_size(self):
+        """Тест на размер стека"""
+        # given
+        my_stack2 = StackMax()
+        stack_utils2 = UtilsMax()
+        stack_utils2.read_stack_data("input2.txt")
+
+        my_stack3 = StackMax()
+        stack_utils3 = UtilsMax()
+        stack_utils3.read_stack_data("input3.txt")
+
+        # when
+        my_stack2, result2 = stack_utils2.fill_stack(my_stack2)
+        my_stack3, result3 = stack_utils3.fill_stack(my_stack3)
+
+        # then
+        self.assertEqual(my_stack2.size, 1)
         self.assertEqual(my_stack3.size, 1)
+
+
+    def test_stack_top(self):
+        """Тест на верхний элемент стека"""
+        # given
+        my_stack2 = StackMax()
+        stack_utils2 = UtilsMax()
+        stack_utils2.read_stack_data("input2.txt")
+
+        # when
+        my_stack2, result2 = stack_utils2.fill_stack(my_stack2)
+
+        # then
+        self.assertEqual(my_stack2.top(), "1")
 
 
 if __name__ == "__main__":
