@@ -15,14 +15,14 @@ class TaskTest1(unittest.TestCase):
         max_allowed_time = datetime.timedelta(seconds=2) # Задаю ограничение по времени
 
         # when
-        tracemalloc.start()  # Запускаем счётчик памяти
-        start_time = datetime.datetime.now()  # Запускаем счётчик времени
+        tracemalloc.start() # Запускаем счётчик памяти
+        start_time = datetime.datetime.now() # Запускаем счётчик времени
 
-        stack_utils.fill_commands_list()  # Переделываем операции в команды
-        my_stack, result = stack_utils.fill_stack(my_stack)  # Заполняем стек и получаем список с удалёнными элементами
+        stack_utils.fill_commands_list() # Переделываем операции в команды
+        my_stack, result = stack_utils.fill_stack(my_stack) # Заполняем стек и получаем список с удалёнными элементами
 
-        finish_time = datetime.datetime.now()  # Измеряем время конца работы
-        spent_time = finish_time - start_time  # Итоговое время
+        finish_time = datetime.datetime.now()
+        spent_time = finish_time - start_time # Итоговое время
 
         current, peak = tracemalloc.get_traced_memory()
         memory_used = current / 10 ** 6
@@ -79,7 +79,6 @@ class TaskTest1(unittest.TestCase):
         # then
         self.assertEqual(my_stack.size, 4)
         self.assertEqual(empty_stack.size, 0)
-
 
     def test_stack_top(self):
         """Тест на верхний элемент стека"""
