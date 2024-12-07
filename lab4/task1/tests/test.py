@@ -12,6 +12,7 @@ class TaskTest1(unittest.TestCase):
         my_stack = Stack()
         stack_utils = Utils()
         stack_utils.read_stack_data()
+        max_allowed_time = datetime.timedelta(seconds=2) # Задаю ограничение по времени
 
         # when
         tracemalloc.start()  # Запускаем счётчик памяти
@@ -28,7 +29,6 @@ class TaskTest1(unittest.TestCase):
 
         # then
         self.assertEqual(my_stack.__str__(),"2,1" )
-        max_allowed_time = datetime.timedelta(seconds=2)
         self.assertLessEqual(spent_time, max_allowed_time)
         self.assertLessEqual(memory_used, 256)
 
