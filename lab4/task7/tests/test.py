@@ -11,23 +11,24 @@ class TaskTest7(unittest.TestCase):
         """Тест стека"""
         # given
         lst, n, m = read_input_file()
+        max_allowed_time = datetime.timedelta(seconds=2)  # Задаю ограничение по времени
 
         # when
-        print(f"Просчитаем время и память работы stack")
-        tracemalloc.start()  # Запускаем счётчик памяти
-        start_time = datetime.datetime.now()  # Запускаем счётчик времени
+        tracemalloc.start()
+        start_time = datetime.datetime.now()
 
-        print(find_sliding_max(lst, n, m))
+        find_sliding_max(lst, n, m)
 
-        finish_time = datetime.datetime.now()  # Измеряем время конца работы
-        print("Итоговое время:", finish_time - start_time)  # Выводим итоговое время
+        finish_time = datetime.datetime.now()
+        spent_time = finish_time - start_time # Итоговое время
 
-        current, peak = tracemalloc.get_traced_memory()  # Присваеваем двум переменным память, используемую сейчас, и на пике
-        print(
-            f"Используемая память: {current / 10 ** 6} МБ\nПамять на пике: {peak / 10 ** 6} МБ\n")  # Выводим время работы в мегабайтах
+        current, peak = tracemalloc.get_traced_memory()
+        memory_used = current / 10 ** 6 # Итоговая память
 
         # then
         self.assertEqual(find_sliding_max(lst, n, m), [7, 7, 5, 6, 6])
+        self.assertLessEqual(spent_time, max_allowed_time)
+        self.assertLessEqual(memory_used, 256)
 
 
 if __name__ == "__main__":
