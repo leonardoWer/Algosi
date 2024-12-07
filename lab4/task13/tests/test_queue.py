@@ -11,12 +11,8 @@ class TaskTest13Queue(unittest.TestCase):
         """Тест стека на основе связанного списка"""
         # given
         queue = Queue()
-        empty_queue = Queue()
 
         # when
-
-        # На примере
-        print(f"Просчитаем время и память работы stack")
         tracemalloc.start()  # Запускаем счётчик памяти
         start_time = datetime.datetime.now()  # Запускаем счётчик времени
 
@@ -26,21 +22,60 @@ class TaskTest13Queue(unittest.TestCase):
         for i in range(2):
             queue.dequeue()
 
-        finish_time = datetime.datetime.now()  # Измеряем время конца работы
-        print("Итоговое время:", finish_time - start_time)  # Выводим итоговое время
+        finish_time = datetime.datetime.now()
+        spent_time = finish_time - start_time  # Итоговое время
 
-        current, peak = tracemalloc.get_traced_memory()  # Присваеваем двум переменным память, используемую сейчас, и на пике
-        print(
-            f"Используемая память: {current / 10 ** 6} МБ\nПамять на пике: {peak / 10 ** 6} МБ\n")  # Выводим время работы в мегабайтах
+        current, peak = tracemalloc.get_traced_memory()
+        memory_used = current / 10 ** 6
 
         # then
-        # На примере
         self.assertEqual(queue.__str__(),"15,16,23,42")
-        self.assertEqual(queue.is_empty(), False)
-        self.assertEqual(queue.length(), 4)
 
+    def test_queue_correctly(self):
+        """Тест на корректность работы"""
+        # given
+        queue = Queue()
+        empty_queue = Queue()
+
+        # when
+        for i in [4, 8, 15, 16, 23, 42]:
+            queue.enqueue(i)
+        for i in range(2):
+            queue.dequeue()
+
+        # then
         self.assertEqual(empty_queue.__str__(), "")
+
+    def test_stack_is_empty(self):
+        """Тест на пустоту очереди"""
+        # given
+        queue = Queue()
+        empty_queue = Queue()
+
+        # when
+        for i in [4, 8, 15, 16, 23, 42]:
+            queue.enqueue(i)
+        for i in range(2):
+            queue.dequeue()
+
+        # then
+        self.assertEqual(queue.is_empty(), False)
         self.assertEqual(empty_queue.is_empty(), True)
+
+    def test_stack_length(self):
+        """Тест на длину очереди"""
+        # given
+        queue = Queue()
+        empty_queue = Queue()
+
+        # when
+        for i in [4, 8, 15, 16, 23, 42]:
+            queue.enqueue(i)
+        for i in range(2):
+            queue.dequeue()
+
+        # then
+        self.assertEqual(queue.length(), 4)
         self.assertEqual(empty_queue.length(), 0)
 
 
