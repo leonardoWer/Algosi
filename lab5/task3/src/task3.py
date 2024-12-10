@@ -1,7 +1,3 @@
-"""
-Сортировка Пугалом
-"""
-
 from lab4 import utils
 import os
 
