@@ -58,7 +58,7 @@ def input_data():
 
 
 def main():
-    n, m, requests = input_data()
+    m, n, requests = input_data()
     result = commands_to_actions(m, n, requests)
     return result
 
