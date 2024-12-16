@@ -1,7 +1,3 @@
-"""
-Сортировка целых чисел
-"""
-
 from lab6 import utils
 import os
 
