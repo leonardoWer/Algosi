@@ -1,5 +1,3 @@
-from operator import contains
-
 from lab6.task2.src.task2 import *
 from lab6 import utils
 import unittest
@@ -9,7 +7,7 @@ import tracemalloc
 
 class TaskTest2(unittest.TestCase):
 
-    def test_is_heap_performance(self):
+    def test_func_performance(self):
         """Тест функции на время и память"""
         # given
         my_phone_book = PhoneBook()
@@ -35,7 +33,7 @@ class TaskTest2(unittest.TestCase):
         self.assertLessEqual(memory_used, 512)
 
 
-    def test_is_heap_correctly(self):
+    def test_func_correctly(self):
         """Тест на корректность работы"""
         # given
         contacts1 = ["add 911 police", "add 76213 Mom", "add 17239 Bob", "find 76213", "find 910", "find 911", "del 910", "del 911", "find 911", "find 76213", "add 76213 daddy", "find 76213"]
