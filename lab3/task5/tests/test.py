@@ -9,7 +9,7 @@ class TaskTest5(unittest.TestCase):
     def test_quick_sort(self):
         """Тест быстрой сортировки на данных из примера"""
         # given
-        lst1 = utils.read_file_1_list()
+        lst1 = utils.str_to_list("3 0 6 1 5")
         lst2 = [1, 3, 1]
 
         # when
