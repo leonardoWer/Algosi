@@ -3,6 +3,10 @@
 """
 
 from lab3 import utils
+import os
+
+
+CURRENT_SCRIPT_DIR_PATH = os.path.dirname(os.path.abspath(__file__))
 
 
 def make_lottery_data(file_name:str) -> (int, int, list[int], list[int]):
@@ -13,8 +17,9 @@ def make_lottery_data(file_name:str) -> (int, int, list[int], list[int]):
      - В последней строке файла содержаться: (dot_i, i от 1 до p)
      Возвращает (количество интервалов, количество точек, полный список всех интервалов, список с точками)
     """
-    file_in = open(f"../txtfiles/{file_name}.txt")
-
+    relative_path = f"../txtfiles/{file_name}.txt"
+    file_path = os.path.join(CURRENT_SCRIPT_DIR_PATH, relative_path)
+    file_in = open(file_path, "r")
     cnt_segment, cnt_dot = map(int, file_in.readline().split())
     list_with_segments, list_with_dots = [], []
 
@@ -62,14 +67,24 @@ def line_search(lst: list, find_el: int) -> int:
     return cnt_el
 
 
-if __name__ == "__main__":
+def input_data():
     cnt_segment, cnt_dot, list_with_segments, list_with_dots = make_lottery_data("input")
-    res1 = lottery_find(list_with_segments, list_with_dots)
-
     cnt_segment_2, cnt_dot_2, list_with_segments_2, list_with_dots_2 = make_lottery_data("input2")
-    res2 = lottery_find(list_with_segments_2, list_with_dots_2)
-
     cnt_segment_3, cnt_dot_3, list_with_segments_3, list_with_dots_3 = make_lottery_data("input3")
+
+    return cnt_segment, cnt_dot, list_with_segments, list_with_dots, cnt_segment_2, cnt_dot_2, list_with_segments_2, list_with_dots_2, cnt_segment_3, cnt_dot_3, list_with_segments_3, list_with_dots_3
+
+
+def main():
+    cnt_segment, cnt_dot, list_with_segments, list_with_dots, cnt_segment_2, cnt_dot_2, list_with_segments_2, list_with_dots_2, cnt_segment_3, cnt_dot_3, list_with_segments_3, list_with_dots_3 = input_data()
+    res1 = lottery_find(list_with_segments, list_with_dots)
+    res2 = lottery_find(list_with_segments_2, list_with_dots_2)
     res3 = lottery_find(list_with_segments_3, list_with_dots_3)
 
-    utils.write_file(["input 1:", res1, "\ninput 2:", res2, "\ninput 3:", res3])
+    result = ["input 1:", res1, "\ninput 2:", res2, "\ninput 3:", res3]
+    return result
+
+
+if __name__ == "__main__":
+    result = main()
+    utils.write_file(CURRENT_SCRIPT_DIR_PATH, result)
