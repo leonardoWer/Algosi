@@ -1,7 +1,3 @@
-"""
-Анти-быстрая сортировка
-"""
-
 from lab6 import utils
 import os
 
