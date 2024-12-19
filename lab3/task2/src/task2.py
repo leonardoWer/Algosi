@@ -2,7 +2,11 @@
 Анти-быстрая сортировка
 """
 
+import os
 from lab3 import utils
+
+
+CURRENT_SCRIPT_DIR_PATH = os.path.dirname(os.path.abspath(__file__))
 
 
 def qsort(lst: list, left: int, right: int):
@@ -40,7 +44,18 @@ def swap(lst: list, i: int, j: int):
     lst[i], lst[j] = lst[j], lst[i]
 
 
+def input_data():
+    data = utils.read_file(CURRENT_SCRIPT_DIR_PATH)
+    n = int(data[0])
+    return n
+
+
+def main():
+    n = input_data()
+    result = anti_qsort(n)
+    return result
+
+
 if __name__ == "__main__":
-    n = utils.read_file_1()
-    res = anti_qsort(n)
-    utils.write_file([res])
+    result = main()
+    utils.write_file(CURRENT_SCRIPT_DIR_PATH, [result])

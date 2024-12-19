@@ -9,7 +9,7 @@ class TaskTest2(unittest.TestCase):
     def test_quick_sort(self):
         """Тест быстрой сортировки на данных из примера"""
         # given
-        n = utils.read_file_1()
+        n = 3
 
         # when
         utils.test_memory_and_time_lst(n, anti_qsort, True)
