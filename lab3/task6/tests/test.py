@@ -9,7 +9,7 @@ class TaskTest6(unittest.TestCase):
     def test_quick_sort(self):
         """Тест быстрой сортировки на данных из примера"""
         # given
-        n, m, lst_a, lst_b = read_input_file_2_numbers_2_lists()
+        n, m, lst_a, lst_b = 4, 4, utils.str_to_list("7 1 4 9"), utils.str_to_list("2 7 8 11")
         lst_c = get_data_c(lst_a, lst_b)
 
         # when
