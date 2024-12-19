@@ -7,18 +7,13 @@ import unittest
 
 class TaskTest3(unittest.TestCase):
 
-    # Тест функции быстрой сортировки на данных из примера
     def test_scarecrow_sort(self):
         """Тест сортировки Пугалом на данных из примера"""
         # given
-        file_in = open("../txtfiles/input.txt")
-
-        n1, k1 = map(int, file_in.readline().split())
-        lst1 = list((map(int, file_in.readline().split())))
-
-        n2, k2 = map(int, file_in.readline().split())
-        lst2 = list((map(int, file_in.readline().split())))
-        file_in.close()
+        n1, k1 = 3, 2
+        lst1 = [2, 1, 3]
+        n2, k2 = 5, 3
+        lst2 = [1, 5, 3, 4, 1]
 
         # when
         print("Просчитаем время и память работы алгоритма")

@@ -3,6 +3,10 @@
 """
 
 from lab3 import utils
+import os
+
+
+CURRENT_SCRIPT_DIR_PATH = os.path.dirname(os.path.abspath(__file__))
 
 
 def scarecrow_sort(n:int, k:int, lst:list) -> str:
@@ -30,16 +34,21 @@ def switch(lst:list, i:int, j:int) -> list:
     return lst
 
 
-if __name__ == "__main__":
-    file_in = open("../txtfiles/input.txt")
+def input_data():
+    data = utils.read_file(CURRENT_SCRIPT_DIR_PATH)
+    n1, k1 = map(int, data[0].split())
+    lst1 = utils.str_to_list(data[1])
+    n2, k2 = map(int, data[2].split())
+    lst2 = utils.str_to_list(data[3])
+    return n1, k1, lst1, n2, k2, lst2
 
-    n1, k1 = map(int, file_in.readline().split())
-    lst1 = list((map(int, file_in.readline().split())))
-
-    n2, k2 = map(int, file_in.readline().split())
-    lst2 = list((map(int, file_in.readline().split())))
-
+def main():
+    n1, k1, lst1, n2, k2, lst2 = input_data()
     res1 = scarecrow_sort(n1, k1, lst1)
     res2 = scarecrow_sort(n2, k2, lst2)
+    return [res1, res2]
 
-    utils.write_file([res1, res2])
+
+if __name__ == "__main__":
+    result = main()
+    utils.write_file(CURRENT_SCRIPT_DIR_PATH, result)
