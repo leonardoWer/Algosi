@@ -3,8 +3,11 @@
 """
 
 from random import *
-
+import os
 from lab3 import utils
+
+
+CURRENT_SCRIPT_DIR_PATH = os.path.dirname(os.path.abspath(__file__))
 
 
 def quick_sort(lst: list, left: int, right: int):
@@ -45,8 +48,9 @@ def randomized_quick_sort(lst: list, left: int, right: int):
 
 
 def input_data():
-    n, lst = utils.read_file()  # Количество элементов и список с элементами
-    n1, lst1 = utils.read_file()  # Количество элементов и список с элементами
+    data = utils.read_file(CURRENT_SCRIPT_DIR_PATH)
+    n, lst = int(data[0]), utils.str_to_list(data[1])
+    n1, lst1 = int(data[0]), utils.str_to_list(data[1])
     return n, lst, n1, lst1
 
 
@@ -60,4 +64,4 @@ def main():
 
 if __name__ == "__main__":
     result = main()
-    utils.write_file(result)
+    utils.write_file(CURRENT_SCRIPT_DIR_PATH, result)

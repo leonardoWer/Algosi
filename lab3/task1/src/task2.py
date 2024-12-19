@@ -3,7 +3,11 @@
 """
 
 from random import *
+import os
 from lab3 import utils
+
+
+CURRENT_SCRIPT_DIR_PATH = os.path.dirname(os.path.abspath(__file__))
 
 
 def randomized_quick_sort_three(lst: list, left: int, right: int):
@@ -42,11 +46,19 @@ def partition_three(lst: list, left: int, right: int):
     return p
 
 
-if __name__ == "__main__":
-    n, lst = utils.read_file()  # Количество элементов и список с элементами
+def input_data():
+    data = utils.read_file(CURRENT_SCRIPT_DIR_PATH)
+    n, lst = int(data[0]), utils.str_to_list(data[1])
+    return n, lst
+
+
+def main():
+    n, lst = input_data()
     randomized_quick_sort_three(lst, 0, n - 1)
+    result = [lst]
+    return result
 
-    res = [1,2,2,2,1,1,14,5,67,7,5,7,4342,2,34,234,23,423,4,553456,1,1,1,43,324,23,5,23452,1]
-    randomized_quick_sort_three(res,0, len(res)-1)
 
-    utils.write_file([lst, res])
+if __name__ == "__main__":
+    result = main()
+    utils.write_file(CURRENT_SCRIPT_DIR_PATH, result)

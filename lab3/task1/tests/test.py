@@ -11,7 +11,7 @@ class TaskTest1(unittest.TestCase):
     def test_quick_sort(self):
         """Тест быстрой сортировки на данных из примера"""
         # given
-        n, lst = utils.read_file()
+        n, lst = 5, utils.str_to_list("2 3 9 2 2")
 
         # when
         utils.test_memory_and_time_lst_n(lst, n, quick_sort, True)
@@ -23,7 +23,7 @@ class TaskTest1(unittest.TestCase):
     def test_randomized_quick_sort(self):
         """Тест рандомной быстрой сортировки на данных из примера"""
         # given
-        n, lst = utils.read_file()
+        n, lst = 5, utils.str_to_list("2 3 9 2 2")
 
         # when
         utils.test_memory_and_time_lst_n(lst, n, randomized_quick_sort, True)
@@ -35,7 +35,7 @@ class TaskTest1(unittest.TestCase):
     def test_randomized_quick_sort_three(self):
         """Тест рандомной быстрой тройной сортировки на данных из примера"""
         # given
-        n, lst = utils.read_file()
+        n, lst = 5, utils.str_to_list("2 3 9 2 2")
 
         # when
         utils.test_memory_and_time_lst_n(lst, n, randomized_quick_sort_three, True)
