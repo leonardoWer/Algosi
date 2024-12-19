@@ -44,9 +44,20 @@ def randomized_quick_sort(lst: list, left: int, right: int):
         randomized_quick_sort(lst, m + 1, right)
 
 
-if __name__ == "__main__":
+def input_data():
     n, lst = utils.read_file()  # Количество элементов и список с элементами
     n1, lst1 = utils.read_file()  # Количество элементов и список с элементами
+    return n, lst, n1, lst1
+
+
+def main():
+    n, lst, n1, lst1 = input_data()
     quick_sort(lst, 0, n - 1)
     randomized_quick_sort(lst1, 0, n1 - 1)
-    utils.write_file([lst, lst1])
+    result = [lst, lst1]
+    return result
+
+
+if __name__ == "__main__":
+    result = main()
+    utils.write_file(result)
